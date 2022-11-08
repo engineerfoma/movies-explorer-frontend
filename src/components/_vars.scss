@@ -1,0 +1,45 @@
+@mixin font($weight, $size, $height) {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: $size;
+    font-weight: $weight;
+    line-height: $height;
+}
+
+@mixin flex($flex-direction, $justify-content, $align-items) {
+    display: flex;
+    flex-direction: $flex-direction;
+    justify-content: $justify-content;
+    align-items: $align-items;
+}
+
+$bckg-color_header: #073042;
+$bck-color: #202020;
+$bck-color_tech: #272727;
+$btn-color_green: #3ddc84;
+$bck-color_grey: #303030;
+$bck-button_grey: #313131;
+$font_grey: #8b8b8b;
+$hoverColor: #808080;
+$white-color: #fff;
+$border: #dadada;
+$border_portfolio: #424242;
+$input_search: #2f2f2f;
+$checkbox: #3DDC84;
+$bck_mov: #222;
+
+
+$breakpoint1439: 1439px;
+$breakpoint1310: 1310px;
+$breakpoint1024: 1024px;
+$breakpoint900: 900px;
+$breakpoint800: 800px;
+$breakpoint768: 768px;
+$breakpoint767: 767px;
+$breakpoint640: 640px;
+$breakpoint600: 600px;
+$breakpoint580: 580px;
+$breakpoint550: 550px;
+$breakpoint480: 480px;
+$breakpoint460: 460px;
+$breakpoint410: 410px;
+$breakpoint320: 320px;

@@ -1,0 +1,29 @@
+@import '../vars';
+
+.gallery {
+    padding: 70px 70px 10px;
+
+    @media screen and (max-width: $breakpoint900) {
+        padding: 70px 30px 30px;
+    }
+
+    @media screen and (max-width: $breakpoint320) {
+        padding: 40px 10px 30px;
+    }
+
+    &__list {
+        @include flex(row, center, center);
+        flex-wrap: wrap;
+        gap: 32px 32px;
+        padding: 0;
+        margin: 0;
+
+        @media screen and (max-width: $breakpoint900) {
+            gap: 35px 24px;
+        }
+
+        @media screen and (max-width: $breakpoint410) {
+            gap: 16px;
+        }
+    }
+}

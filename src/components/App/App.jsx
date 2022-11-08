@@ -2,9 +2,14 @@ import './App.scss';
 import { currentUserContext } from '../../context/CurrentUserContext';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Header from '../Header/Header';
-import ProtectedRoute from '../ProtectedRoute';
+// import ProtectedRoute from '../ProtectedRoute';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
+import Main from '../Main/Main';
+import Movies from '../Movies/Movies';
+import SavedMovies from '../SavedMovies/SavedMovies';
+import Profile from '../Profile/Profile';
+import Footer from '../Footer/Footer';
 
 
 function App() {
@@ -14,27 +19,24 @@ function App() {
         <Header
         />
         <Switch>
-          <ProtectedRoute
-            exact
-            path="/"
-          />
+          <Route exact path="/">
+            <Main />
+          </Route>
+          <Route path="/movies">
+            <Movies />
+          </Route>
+          {/* <Route path="/saved-movies">
+            <SavedMovies />
+          </Route>
+          <Route path="/profile">
+            <Profile />
+          </Route>
           <Route path="/signin">
-            <Login
-              onLogin={onLogin}
-            />
+            <Login />
           </Route>
           <Route path="/signup">
-            <Register
-            />
-          </Route>
-          <Route>
-            {loggedIn ? (
-              <Redirect to="/" />
-            ) : (
-              <Redirect to="/signin" />
-            )}
-          </Route>
-
+            <Register />
+          </Route> */}
         </Switch>
         <Footer />
       </div>

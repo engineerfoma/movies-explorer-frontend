@@ -1,0 +1,65 @@
+@import '../vars';
+
+.list-element {
+    text-align: center;
+    max-width: 360px;
+    max-height: 319px;
+    background-color: $bck_mov;
+    color: $white-color;
+    padding: 18px 0;
+    list-style: none;
+
+    @media screen and (max-width: $breakpoint900) {
+        max-width: 342px;
+        max-height: 309px;
+    }
+
+    @media screen and (max-width: $breakpoint410) {
+        max-width: 300px;
+        max-height: 271px;
+    }
+
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 18px;
+    }
+
+    &__title {
+        @include font(500, 15px, 1.2);
+        margin: 0;
+    }
+
+    &__duration {
+        @include font(500, 13px, 1.38);
+        color: $font_grey;
+    }
+
+    &__img {
+        margin: 18px 0;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    &__button {
+        &_defauld {
+            width: 100px;
+            height: 29px;
+            border-radius: 30px;
+            border: none;
+            background-image: url('../../images/saved.svg');
+            background-repeat: no-repeat;
+        }
+
+        &_save {
+            width: 100px;
+            height: 29px;
+            border-radius: 30px;
+            background-color: $bck-button_grey;
+            border: none;
+            background-image: url('../../images/save.svg');
+            background-repeat: no-repeat;
+        }
+    }
+}

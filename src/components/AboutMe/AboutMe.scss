@@ -1,0 +1,111 @@
+@import '../vars';
+
+.section {
+    &__student {
+        padding-bottom: 100px;
+        color: $white-color;
+
+        @media screen and (max-width: $breakpoint410) {
+            padding: 60px 14px;
+        }
+
+        &_container {
+            display: grid;
+            grid-template-areas:
+                "A E"
+                "B E"
+                "C E"
+                "D E";
+            gap: 18px 75px;
+            margin-top: 66px;
+
+            @media screen and (max-width: $breakpoint768) {
+                gap: 16px 69px;
+            }
+
+            @media screen and (max-width: $breakpoint600) {
+                grid-template-areas:
+                    "E"
+                    "A"
+                    "B"
+                    "C"
+                    "D";
+                margin-top: 60px;
+            }
+        }
+
+        &_subtitle {
+            @include font(400, 50px, 1.16);
+            margin: 0;
+            grid-area: A;
+
+            @media screen and (max-width: $breakpoint768) {
+                @include font(400, 40px, 1);
+            }
+        }
+
+        &_speciality {
+            @include font(500, 18px, 1.11);
+            grid-area: B;
+
+            @media screen and (max-width: $breakpoint768) {
+                @include font(500, 12px, 1.5);
+            }
+
+            @media screen and (max-width: $breakpoint410) {
+                @include font(400, 11px, 1.45);
+                margin: 4px 0 0;
+            }
+        }
+
+        &_description {
+            @include font(500, 14px, 1.57);
+            margin: 8px 0 0;
+            grid-area: C;
+            max-width: 550px;
+
+            @media screen and (max-width: $breakpoint768) {
+                @include font(400, 12px, 1.5);
+            }
+
+            @media screen and (max-width: $breakpoint410) {
+                @include font(400, 11px, 1.45);
+                margin: 4px 0 0;
+            }
+
+        }
+
+        &_label {
+            @include font(500, 14px, 1.21);
+            margin: auto 0;
+            grid-area: D;
+
+            @media screen and (max-width: $breakpoint768) {
+                margin: 60px 0 0;
+            }
+
+            @media screen and (max-width: $breakpoint410) {
+                margin: 24px 0 0;
+            }
+        }
+
+        &_avatar {
+            grid-area: E;
+
+            @media screen and (max-width: $breakpoint768) {
+                width: 255px;
+                height: 307px;
+            }
+
+            @media screen and (max-width: $breakpoint600) {
+                width: 292px;
+                height: 352px;
+                margin: 0 auto;
+            }
+
+            @media screen and (max-width: $breakpoint410) {
+                padding-bottom: 20px;
+            }
+        }
+    }
+}

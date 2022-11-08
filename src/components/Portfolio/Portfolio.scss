@@ -1,0 +1,63 @@
+@import '../vars';
+
+.portfolio {
+    padding: 0 70px 125px;
+    color: $white-color;
+
+    @media screen and (max-width: $breakpoint768) {
+        padding: 0 50px 90px;
+    }
+
+    @media screen and (max-width: $breakpoint410) {
+        padding: 0 14px 70px;
+    }
+
+    &__title {
+        margin: 0 0 50px;
+        @include font(400, 18px, 1.11);
+        color: $font_grey;
+
+        @media screen and (max-width: $breakpoint580) {
+            @include font(400, 14px, 1.43);
+        }
+    }
+
+    &__links {
+        &_list {
+            padding: 0;
+            list-style: none;
+            width: 100%;
+            margin: 0;
+        }
+    }
+
+    &__link {
+        color: $white-color;
+        @include font(400, 30px, 1.67);
+        text-decoration: none;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid $border_portfolio;
+        margin-top: 20px;
+
+        @media screen and (max-width: $breakpoint768) {
+            @include font(400, 28px, 1.79);
+        }
+
+        @media screen and (max-width: $breakpoint580) {
+            height: 48px;
+            @include font(400, 18px, 1.56);
+        }
+
+        &-last {
+            border-bottom: none;
+        }
+
+        &_arrow {
+            @media screen and (max-width: $breakpoint580) {
+                width: 10px;
+                height: 18px;
+            }
+        }
+    }
+}
