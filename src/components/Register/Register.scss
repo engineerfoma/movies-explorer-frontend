@@ -1,0 +1,22 @@
+@import '../vars';
+
+
+.form {
+    @include flex(column, center, start);
+    margin: 0 auto;
+    box-sizing: border-box;
+    width: 31%;
+
+    @media screen and (max-width: 900px) {
+        width: 51%;
+    }
+
+    @media screen and (max-width: 550px) {
+        width: 100%;
+        padding: 0 30px 65px;
+    }
+}
+
+.login__form {
+    padding-bottom: 24px;
+}

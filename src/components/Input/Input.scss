@@ -1,0 +1,24 @@
+@import '../vars';
+
+.container {
+    @include flex(column, center, start);
+    width: 100%;
+}
+
+.label {
+    @include font(400, 10px, 1.2);
+    color: $font_grey;
+    margin-bottom: 5px;
+}
+
+.input {
+    width: 100%;
+    margin-bottom: 24px;
+    @include font(400, 14px, 1.21);
+    background-color: $bck-color;
+    outline: none;
+    border: none;
+    color: $white-color;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $border_portfolio;
+}

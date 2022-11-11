@@ -1,6 +1,6 @@
 import './MoviesCardList.scss';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import { movies, key } from '../../utils/constants.js';
+import movies from '../../utils/constants.js';
 
 function MoviesCardList() {
     return (
@@ -10,7 +10,7 @@ function MoviesCardList() {
                     return (
                         <MoviesCard
                             movie={item}
-                            key={key}
+                            key={item._id}
                         />)
                 })}
             </ul>

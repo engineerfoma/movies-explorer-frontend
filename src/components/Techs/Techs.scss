@@ -90,6 +90,10 @@
                 @include font(400, 12px, 1.25);
 
             }
+
+            &:hover {
+                opacity: .7;
+            }
         }
     }
 }

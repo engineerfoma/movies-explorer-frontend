@@ -43,16 +43,18 @@
     }
 
     &__button {
-        &_defauld {
+        &_default {
+            transition: all .3s;
             width: 100px;
             height: 29px;
             border-radius: 30px;
             border: none;
-            background-image: url('../../images/saved.svg');
+            background-image: url('../../images/save6d.svg');
             background-repeat: no-repeat;
         }
 
         &_save {
+            transition: all .2s;
             width: 100px;
             height: 29px;
             border-radius: 30px;

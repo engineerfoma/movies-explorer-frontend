@@ -1,0 +1,25 @@
+@import '../vars';
+
+.more {
+    margin: 0;
+    padding: 50px 70px 80px;
+
+    @media screen and (max-width: $breakpoint900) {
+        padding: 50px 30px 80px;
+    }
+    
+    @media screen and (max-width: $breakpoint410) {
+        padding: 50px 10px 80px;
+    }
+    
+
+    &__button {
+        padding: 0;
+        width: 100%;
+        height: 36px;
+        @include font(500, 12px, 1.25);
+        color: $white-color;
+        background-color: $input_search;
+        border: none;
+    }
+}

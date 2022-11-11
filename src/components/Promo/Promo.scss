@@ -6,7 +6,7 @@
     height: 574px;
     box-sizing: border-box;
     background-color: $bckg-color_header;
-    
+
     @media screen and (max-width: $breakpoint768) {
         max-height: 850px;
         height: 100%;
@@ -62,7 +62,7 @@
     }
 
     &__subtitle {
-        
+
         @include font(400, 13px, 1.23);
         opacity: .5;
         max-width: 320px;
@@ -97,17 +97,15 @@
         height: 36px;
         margin-top: 94px;
         box-sizing: border-box;
-        padding: 10px 20px;
         @include font(500, 12px, 1.33);
         border: 1px solid rgba(255, 255, 255, .6);
         border-radius: 3px;
-
+        vertical-align: middle;
         color: $white-color;
         background-color: $bckg-color_header;
 
         @media screen and (max-width: $breakpoint768) {
-            display: flex;
-            justify-content: center;
+            @include flex(row, center, center);
             margin: 92px auto 0;
 
         }
@@ -120,6 +118,11 @@
         @media screen and (max-width: $breakpoint320) {
             margin: 80px auto 0;
 
+        }
+        
+        &:hover {
+            opacity: 0.6;
+            transition: all .1s;
         }
     }
 }

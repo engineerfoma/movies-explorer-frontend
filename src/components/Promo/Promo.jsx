@@ -1,7 +1,8 @@
 import Planet from '../../images/landing-logo.png';
 import './Promo.scss';
 
-function Promo() {
+function Promo({ scroll }) {
+
     return (
         <section className="promo">
             <div className="promo__container">
@@ -10,7 +11,7 @@ function Promo() {
                 <p className="promo__subtitle">Листайте ниже,
                     чтобы узнать больше про этот проект и его создателя.</p>
             </div>
-            <button type="button" className="promo__button">Узнать больше</button>
+            <button type="button" onClick={scroll} className="promo__button">Узнать больше</button>
         </section>)
 }
 

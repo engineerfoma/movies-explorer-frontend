@@ -1,9 +1,10 @@
 import "./AboutProject.scss";
 
-function AboutProject() {
+function AboutProject({ aboutRef }) {
+
     return (
-        <section className="section section__about">
-            <h2 className="section__title section__about_title">О проекте</h2>
+        <section className="section section__about" ref={aboutRef}>
+            <h2 className="section__title section__about_title" >О проекте</h2>
             <div className="section__about_container">
                 <p className="section__about_subtitle section__about_subtitle-amount">Дипломный проект
                     включал 5 этапов</p>
