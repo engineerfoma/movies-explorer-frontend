@@ -1,5 +1,6 @@
 import './Register.scss';
 import Input from '../Input/Input';
+import AuthSubmit from '../AuthSubmit/AuthSubmit';
 
 function Register() {
     return (
@@ -17,7 +18,13 @@ function Register() {
                     about="password"
                     placeholder="Пароль"
                 />
-                
+                <AuthSubmit
+                    page="register"
+                    textButton="Зарегистрироваться"
+                    label="Уже зарегистрированы?"
+                    link="/signin"
+                    linkText="Войти"
+                />
             </form>
         </main>
     )

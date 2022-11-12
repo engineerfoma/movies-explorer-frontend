@@ -1,5 +1,7 @@
 import './Login.scss';
+import AuthSubmit from '../AuthSubmit/AuthSubmit';
 import Input from '../Input/Input';
+
 
 function Login() {
     return (
@@ -13,7 +15,13 @@ function Login() {
                     about="password"
                     placeholder="Пароль"
                 />
-        
+                <AuthSubmit
+                    page="login"
+                    textButton="Войти"
+                    label="Ещё не зарегистрированы?"
+                    link="/signup"
+                    linkText="Регистрация"
+                />
             </form>
         </main>
     )

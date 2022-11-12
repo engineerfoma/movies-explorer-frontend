@@ -1,6 +1,6 @@
 import './Input.scss';
 
-function Input({ about, placeholder }) {
+function Input({ about, placeholder, value, state }) {
 
     return (
         <div className="container">
@@ -9,14 +9,30 @@ function Input({ about, placeholder }) {
                 className={`label label__${about}`}>
                 {placeholder}
             </label>
-            <input
-                type={about === "name" ? `text` : `${about}`}
-                id={`input-${about}`}
-                name={about}
-                placeholder={placeholder}
-                className={`input input__${about}`}
-                required
-            />
+            {state ? (
+                <input
+                    type={about === "name" ? `text` : `${about}`}
+                    id={`input-${about}`}
+                    name={about}
+                    placeholder={placeholder}
+                    className={`input input__${about}`}
+                    value={value}
+                    required
+                    readOnly
+                />
+            ) : (
+                <input
+                    type={about === "name" ? `text` : `${about}`}
+                    id={`input-${about}`}
+                    name={about}
+                    placeholder={placeholder}
+                    className={`input input__${about}`}
+                    value={value}
+                    required
+                />
+            )
+            }
+
         </div>
     )
 }

@@ -8,13 +8,23 @@
         padding: 0;
         @include flex(row, center, center);
         gap: 16px;
+
+        @media screen and (max-width: $breakpoint768) {
+            display: none;
+        }
     }
 
     &__element {
+
         &_link {
             @include font(400, 13px, 1.38);
             color: $white-color;
             text-decoration: none;
+
+            &:hover {
+                cursor: pointer;
+                opacity: .8;
+            }
 
             &-active {
                 @include font(500, 13px, 1.38);

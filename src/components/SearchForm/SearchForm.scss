@@ -45,5 +45,10 @@
         background-repeat: no-repeat;
         background-position: 4px;
         vertical-align: middle;
+
+        &:hover {
+            cursor: pointer;
+            opacity: .8;
+        }
     }
 }

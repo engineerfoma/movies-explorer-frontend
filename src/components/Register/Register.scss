@@ -1,6 +1,5 @@
 @import '../vars';
 
-
 .form {
     @include flex(column, center, start);
     margin: 0 auto;
@@ -17,6 +16,6 @@
     }
 }
 
-.login__form {
-    padding-bottom: 24px;
-}
+// .login__form {
+//     padding-bottom: 24px;
+// }

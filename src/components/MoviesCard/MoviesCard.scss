@@ -40,6 +40,11 @@
         margin: 18px 0;
         width: 100%;
         object-fit: cover;
+
+        &:hover {
+            cursor: pointer;
+            opacity: .8;
+        }
     }
 
     &__button {
@@ -51,6 +56,11 @@
             border: none;
             background-image: url('../../images/save6d.svg');
             background-repeat: no-repeat;
+            
+            &:hover {
+                cursor: pointer;
+                opacity: .8;
+            }
         }
 
         &_save {
@@ -62,6 +72,11 @@
             border: none;
             background-image: url('../../images/save.svg');
             background-repeat: no-repeat;
+
+            &:hover {
+                cursor: pointer;
+                opacity: .8;
+            }
         }
     }
 }

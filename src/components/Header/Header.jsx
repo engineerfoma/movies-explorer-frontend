@@ -3,16 +3,15 @@ import './Header.scss';
 import Logo from '../../images/logo_main.svg';
 import HeaderAuth from '../HeaderAuth/HeaderAuth';
 import Navigation from '../Navigation/Navigation';
-import Icon from '../../images/icon.svg';
 import Burger from '../Burger/Burger';
+import Account from '../Account/Account';
 
 function Header() {
     const PathMovies = ['/movies', '/saved-movies', '/profile'];
 
-
     return (
         <>
-            <Route exact path='/'>
+            <Route exact path="/">
                 <header className="header">
                     <img src={Logo} alt="Лого" className="header__logo" />
                     <nav className="header__nav">
@@ -21,16 +20,16 @@ function Header() {
                     </nav>
                 </header>
             </Route>
-            <Route path='/signin'>
+            <Route path="/signin">
                 <HeaderAuth
                     logo={Logo}
-                    title='Рады видеть!'
+                    title="Рады видеть!"
                 />
             </Route>
-            <Route path='/signup'>
+            <Route path="/signup">
                 <HeaderAuth
                     logo={Logo}
-                    title='Добро пожаловать!'
+                    title="Добро пожаловать!"
                 />
             </Route>
             <Route path={PathMovies}>
@@ -39,12 +38,10 @@ function Header() {
                         <img src={Logo} alt="logo" className="header__logo" />
                     </Link>
                     <Navigation />
-                    <div>
-                        <img src={Icon} alt="icon" className="header__container_icon" />
-                        <Burger
-                            active={true}
-                        />
-                    </div>
+                    <Account />
+                    <Burger
+                        active={true}
+                    />
                 </header>
             </Route>
         </>

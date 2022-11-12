@@ -53,5 +53,14 @@
                 gap: 12px;
             }
         }
+
+        &_el-link {
+            text-decoration: none;
+            color: $white-color;
+
+            &:hover {
+                opacity: .8;
+            }
+        }
     }
 }

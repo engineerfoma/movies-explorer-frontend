@@ -27,7 +27,9 @@
             height: 253px;
         }
     }
-    
+
+
+
     &__container {
         width: 31%;
         height: 100%;
@@ -38,21 +40,21 @@
         @media screen and (max-width: $breakpoint900) {
             width: 51%;
             padding: 0 0 40px;
-            @include flex( column, end, start);
+            @include flex(column, end, start);
         }
 
         @media screen and (max-width: $breakpoint550) {
-            width:100%;
+            width: 100%;
             padding: 0 30px 80px;
-            @include flex( column, end, center);
+            @include flex(column, end, center);
         }
-        
+
     }
 
     &__main {
         background-color: $bck-color;
     }
-    
+
     &__title {
         @include font(500, 24px, 1.21);
         color: $white-color;
@@ -62,10 +64,6 @@
     &__logo {
         max-width: 38px;
         max-height: 38px;
-
-        &_auth {
-
-        }
     }
 
     &__nav {

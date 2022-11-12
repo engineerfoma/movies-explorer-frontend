@@ -1,0 +1,49 @@
+@import '../vars';
+
+.account {
+    @include flex(row, center, center);
+    @include font(500, 13px, 1.1);
+    color: $white-color;
+    text-decoration: none;
+
+    @media screen and (max-width: $breakpoint768) {
+        display: none;
+    }
+
+    &:hover {
+        cursor: pointer;
+        opacity: .8;
+    }
+
+    &__burger {
+        display: block;
+        @include flex(row, center, center);
+        position: fixed;
+        bottom: 90px;
+
+        @media screen and (max-width: $breakpoint550) {
+            bottom: 46px;
+        }
+        
+    }
+
+    &__label {
+        padding-right: 7px;
+        text-decoration: none;
+    }
+
+    &__logo {
+        width: 26px;
+        height: 26px;
+
+        position: relative;
+        border-radius: 50%;
+        background-color: $bck-button_grey;
+
+        &_icon {
+            position: absolute;
+            top: 7px;
+            right: 7px;
+        }
+    }
+}
