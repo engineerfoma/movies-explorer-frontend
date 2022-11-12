@@ -5,6 +5,7 @@
 
     @media screen and (max-width: $breakpoint768) {
         display: block;
+        z-index: 5;
     }
 
     &__active {
@@ -100,7 +101,5 @@
                 opacity: .8;
             }
         }
-
     }
-
 }

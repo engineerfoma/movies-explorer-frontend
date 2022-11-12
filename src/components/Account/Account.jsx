@@ -5,7 +5,7 @@ import Profile from '../../images/profile.svg';
 function Account({ burger, state }) {
 
     return (
-        <NavLink to="/profile" className={`account ${burger && state ? "account__burger" : ""}`}>
+        <NavLink to="/profile" className={`account ${burger && state ? "account__burger" : ""}`} >
             <span className="account__label">
                 Аккаунт
             </span>

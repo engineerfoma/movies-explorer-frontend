@@ -8,19 +8,19 @@ function Portfolio() {
             <nav className="portfolio__links">
                 <ul className="portfolio__links_list">
                     <li className="porfolio__links_el">
-                        <a href="https://github.com/engineerfoma/how-to-learn.git" className="portfolio__link">
+                        <a href="https://github.com/engineerfoma/how-to-learn.git" className="portfolio__link" target="_blank">
                             Статичный сайт
                             <img src={Arrow} alt="arrow" className="portfolio__link_arrow" />
                         </a>
                     </li>
                     <li className="porfolio__links_el">
-                        <a href="https://github.com/engineerfoma/russian-travel.git" className="portfolio__link">
+                        <a href="https://github.com/engineerfoma/russian-travel.git" className="portfolio__link" target="_blank">
                             Адаптивный сайт
                             <img src={Arrow} alt="arrow" className="portfolio__link_arrow" />
                         </a>
                     </li>
                     <li className="porfolio__links_el">
-                        <a href="https://github.com/engineerfoma/react-mesto-api-full.git" className="portfolio__link portfolio__link-last">
+                        <a href="https://github.com/engineerfoma/react-mesto-api-full.git" className="portfolio__link portfolio__link-last" target="_blank">
                             Одностраничное приложение
                             <img src={Arrow} alt="arrow" className="portfolio__link_arrow" />
                         </a>

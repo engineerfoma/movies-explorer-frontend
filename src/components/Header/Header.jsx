@@ -39,9 +39,7 @@ function Header() {
                     </Link>
                     <Navigation />
                     <Account />
-                    <Burger
-                        active={true}
-                    />
+                    <Burger />
                 </header>
             </Route>
         </>

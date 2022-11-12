@@ -32,7 +32,6 @@
             @media screen and (max-width: $breakpoint410) {
                 @include font(400, 30px, 1.2);
                 margin: 60px 0 24px;
-                
             }
         }
 
@@ -44,7 +43,6 @@
             @media screen and (max-width: $breakpoint768) {
                 @include font(400, 12px, 1.5);
                 margin: 0 auto 83px;
-
             }
 
             @media screen and (max-width: $breakpoint410) {

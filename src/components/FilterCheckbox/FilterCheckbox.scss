@@ -1,16 +1,16 @@
 @import '../vars';
 
 .filter {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 12px;
-        color: $white-color;
-        @include font(400, 14px, 1.29);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    color: $white-color;
+    @include font(400, 14px, 1.29);
 
-        @media screen and (max-width: $breakpoint410) {
-            @include font(400, 11px, 1.64);
-        }
+    @media screen and (max-width: $breakpoint410) {
+        @include font(400, 11px, 1.64);
+    }
 
     &__label {
         margin: 0;

@@ -3,10 +3,10 @@ import './Input.scss';
 function Input({ about, placeholder, value, state }) {
 
     return (
-        <div className="container">
+        <div className={`container${state ? "__profile" : ""} container__${about}`}>
             <label
                 htmlFor={`input-${about}`}
-                className={`label label__${about}`}>
+                className={`label label__${about} ${state ? "label__profile" : ""}`}>
                 {placeholder}
             </label>
             {state ? (
@@ -15,7 +15,7 @@ function Input({ about, placeholder, value, state }) {
                     id={`input-${about}`}
                     name={about}
                     placeholder={placeholder}
-                    className={`input input__${about}`}
+                    className={`input input__profile input__${about}`}
                     value={value}
                     required
                     readOnly
@@ -32,7 +32,6 @@ function Input({ about, placeholder, value, state }) {
                 />
             )
             }
-
         </div>
     )
 }

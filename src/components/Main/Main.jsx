@@ -6,18 +6,18 @@ import AboutMe from '../AboutMe/AboutMe';
 import Portfolio from '../Portfolio/Portfolio';
 
 function Main() {
-    
+
     const aboutRef = useRef(null);
 
     const scroll = () => aboutRef.current.scrollIntoView({ behavior: 'smooth' });
 
     return (
         <main>
-            <Promo 
-            scroll={scroll}
+            <Promo
+                scroll={scroll}
             />
-            <AboutProject 
-            aboutRef={aboutRef}
+            <AboutProject
+                aboutRef={aboutRef}
             />
             <Techs />
             <AboutMe />

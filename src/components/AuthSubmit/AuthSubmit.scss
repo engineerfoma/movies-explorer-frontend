@@ -4,7 +4,6 @@
     @include flex(column, end, center);
     width: 100%;
 
-
     &_login {
         padding-top: 179px;
 
@@ -36,7 +35,6 @@
             @include font(500, 12px, 1.25);
 
         }
-
 
         &:hover {
             cursor: pointer;
