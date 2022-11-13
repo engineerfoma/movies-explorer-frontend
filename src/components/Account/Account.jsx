@@ -10,7 +10,7 @@ function Account({ burger, state }) {
                 Аккаунт
             </span>
             <div className="account__logo">
-                <img src={Profile} alt="icon" className="account__logo_icon" />
+                <img src={Profile} alt="профиль" className="account__logo_icon" />
             </div>
         </NavLink>
     )

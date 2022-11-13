@@ -35,7 +35,7 @@ function Header() {
             <Route path={PathMovies}>
                 <header className="header header__main">
                     <Link to="/">
-                        <img src={Logo} alt="logo" className="header__logo" />
+                        <img src={Logo} alt="лого" className="header__logo" />
                     </Link>
                     <Navigation />
                     <Account />

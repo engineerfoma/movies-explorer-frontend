@@ -8,6 +8,7 @@
     color: $white-color;
     padding: 18px 0;
     list-style: none;
+    border-radius: 6px;
 
     @media screen and (max-width: $breakpoint900) {
         max-width: 342px;
@@ -71,6 +72,22 @@
             background-color: $bck-button_grey;
             border: none;
             background-image: url('../../images/save.svg');
+            background-repeat: no-repeat;
+
+            &:hover {
+                cursor: pointer;
+                opacity: .8;
+            }
+        }
+
+        &_remove {
+            width: 100px;
+            height: 29px;
+            background-color: $bck-button_grey;
+            border: none;
+            border-radius: 30px;
+            background-image: url('../../images/x.svg');
+            background-position: 50% 50%;
             background-repeat: no-repeat;
 
             &:hover {

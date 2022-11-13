@@ -16,7 +16,7 @@ function AboutMe() {
                     фриланс-заказами и ушёл с постоянной работы.
                 </p>
                 <h3 className="section__student_label">Github</h3>
-                <img src={Avatar} alt="avatar" className="section__student_avatar" />
+                <img src={Avatar} alt="аватар" className="section__student_avatar" />
             </div>
         </section>
     )

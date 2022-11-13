@@ -16,8 +16,8 @@ function Burger() {
     return (
         <div className={`burger burger__${openBurger ? "active" : "disabled"}`} onClick={handlerOpenMenu}>
             <div className={openBurger ? "opacity" : ""}>
-                <img src={BurgerMenu} alt="burger" className={`burger__menu${!openBurger ? "" : "_disabled"}`} />
-                <img src={Close} alt="close" className={`burger__close${!openBurger ? "" : "_active"}`} />
+                <img src={BurgerMenu} alt="бургер-меню" className={`burger__menu${!openBurger ? "" : "_disabled"}`} />
+                <img src={Close} alt="закрыть" className={`burger__close${!openBurger ? "" : "_active"}`} />
                 <div className="burger__active_container">
                     <nav className={`burger__nav${!openBurger ? "_disabled" : ""}`}>
                         <ul className="burger__list">
