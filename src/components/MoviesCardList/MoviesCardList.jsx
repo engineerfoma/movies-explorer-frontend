@@ -11,7 +11,7 @@ function MoviesCardList() {
                         <MoviesCard
                             movie={item}
                             key={item._id}
-                            // remove={true}
+                        // remove={true}
                         />)
                 })}
             </ul>
