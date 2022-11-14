@@ -1,0 +1,99 @@
+@import '../vars';
+
+.list-element {
+    text-align: center;
+    max-width: 360px;
+    max-height: 319px;
+    background-color: $bck_mov;
+    color: $white-color;
+    padding: 18px 0;
+    list-style: none;
+    border-radius: 6px;
+
+    @media screen and (max-width: $breakpoint900) {
+        max-width: 342px;
+        max-height: 309px;
+    }
+
+    @media screen and (max-width: $breakpoint410) {
+        max-width: 300px;
+        max-height: 271px;
+    }
+
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 18px;
+    }
+
+    &__title {
+        @include font(500, 15px, 1.2);
+        margin: 0;
+    }
+
+    &__duration {
+        @include font(500, 13px, 1.38);
+        color: $font_grey;
+    }
+
+    &__img {
+        margin: 18px 0;
+        width: 100%;
+        object-fit: cover;
+
+        &:hover {
+            cursor: pointer;
+            opacity: .8;
+        }
+    }
+
+    &__button {
+        &_default {
+            transition: all .3s;
+            width: 100px;
+            height: 29px;
+            border-radius: 30px;
+            border: none;
+            background-image: url('../../images/save6d.svg');
+            background-repeat: no-repeat;
+
+            &:hover {
+                cursor: pointer;
+                opacity: .8;
+            }
+        }
+
+        &_save {
+            transition: all .2s;
+            width: 100px;
+            height: 29px;
+            border-radius: 30px;
+            background-color: $bck-button_grey;
+            border: none;
+            background-image: url('../../images/save.svg');
+            background-repeat: no-repeat;
+
+            &:hover {
+                cursor: pointer;
+                opacity: .8;
+            }
+        }
+
+        &_remove {
+            width: 100px;
+            height: 29px;
+            background-color: $bck-button_grey;
+            border: none;
+            border-radius: 30px;
+            background-image: url('../../images/x.svg');
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+
+            &:hover {
+                cursor: pointer;
+                opacity: .8;
+            }
+        }
+    }
+}

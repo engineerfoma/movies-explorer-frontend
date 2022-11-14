@@ -1,0 +1,105 @@
+@import '../vars';
+
+.burger {
+    display: none;
+
+    @media screen and (max-width: $breakpoint768) {
+        display: block;
+        z-index: 5;
+    }
+
+    &__active {
+        @media screen and (max-width: $breakpoint768) {
+            display: block;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: $bck-color;
+            height: 100vh;
+            width: 68%;
+            z-index: 5;
+            padding: 159px 90px 90px;
+            box-sizing: border-box;
+            right: 0;
+            transition: .5s ease;
+
+            @media screen and (max-width: $breakpoint550) {
+                width: 100%;
+            }
+        }
+
+        &_container {
+            @include flex(column, space-between, center)
+        }
+    }
+
+    &__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        @include flex(column, center, center);
+    }
+
+    &__element {
+        margin-bottom: 28px;
+
+        @media screen and (max-width: $breakpoint550) {
+            margin-bottom: 24px;
+        }
+
+        &:hover {
+            cursor: pointer;
+            opacity: .8;
+        }
+
+        &_link {
+            text-decoration: none;
+            @include font (500, 18px, 1.22);
+            color: $white-color;
+            padding-bottom: 7px;
+
+            &-active {
+                border-bottom: 2px solid $white-color;
+            }
+        }
+    }
+
+    &__menu {
+
+        &:hover {
+            cursor: pointer;
+            opacity: .7;
+        }
+
+        &_disabled {
+            display: none;
+        }
+    }
+
+    &__nav {
+
+        &_disabled {
+            display: none;
+        }
+    }
+
+    &__close {
+        display: none;
+
+        &_active {
+            position: fixed;
+            top: 23px;
+            right: 23px;
+
+            @media screen and (max-width: $breakpoint550) {
+                top: 13px;
+                right: 13px;
+            }
+
+            &:hover {
+                cursor: pointer;
+                opacity: .8;
+            }
+        }
+    }
+}

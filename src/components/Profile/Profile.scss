@@ -1,0 +1,81 @@
+@import '../vars';
+
+.profile {
+    padding: 74px 0 70px;
+    height: 100%;
+
+    @media screen and (max-width: $breakpoint768) {
+        padding: 236px 0 269px;
+    }
+
+    @media screen and (max-width: $breakpoint410) {
+        padding: 70px 0 40px;
+    }
+
+    &__container {
+        width: 32%;
+        margin: 0 auto;
+
+        @media screen and (max-width: $breakpoint768) {
+            width: 53%;
+        }
+
+        @media screen and (max-width: $breakpoint410) {
+            width: 81%;
+        }
+    }
+
+    &__title {
+        @include font(500, 24px, 1.21);
+        margin: 0 0 123px;
+        color: $white-color;
+        text-align: center;
+
+        @media screen and (max-width: $breakpoint768) {
+            margin: 0 0 96px;
+        }
+
+        @media screen and (max-width: $breakpoint410) {
+            margin: 0 0 80px;
+        }
+    }
+
+    &__edit {
+        @include flex(column, center, center);
+        margin-top: 220px;
+        gap: 16px;
+
+        @media screen and (max-width: $breakpoint768) {
+            margin-top: 210px;
+        }
+
+        @media screen and (max-width: $breakpoint410) {
+            margin-top: 379px;
+        }
+
+    }
+
+    &__button {
+        @include font(400, 13px, 1.23);
+        border: none;
+        background-color: inherit;
+
+        @media screen and (max-width: $breakpoint410) {
+            @include font(400, 12px, 1.25);
+        }
+
+        &:hover {
+            cursor: pointer;
+            opacity: .8;
+        }
+
+        &_edit {
+            color: $white-color;
+        }
+
+        &_logout {
+            color: $red;
+            font-weight: 500;
+        }
+    }
+}

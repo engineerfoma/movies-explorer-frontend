@@ -1,0 +1,54 @@
+@import '../vars';
+
+.container {
+    @include flex(column, center, start);
+    width: 100%;
+
+    &__profile {
+        @include flex(row, space-between, start);
+        padding: 17px 0 16px;
+        border-bottom: 1px solid $border_portfolio;
+    }
+
+    &__email-my {
+        border: none;
+    }
+}
+
+.label {
+    @include font(400, 10px, 1.2);
+    color: $font_grey;
+    margin-bottom: 5px;
+
+    &__profile {
+        color: $white-color;
+        @include font(500, 11px, 1.18);
+    }
+}
+
+.input {
+    width: 100%;
+    margin-bottom: 24px;
+    @include font(400, 14px, 1.21);
+    background-color: $bck-color;
+    outline: none;
+    border: none;
+    color: $white-color;
+    padding: 0 0 10px;
+    border-bottom: 1px solid $border_portfolio;
+
+    &__email {
+        font-weight: 500;
+    }
+
+    &__profile {
+        border: none;
+        text-align: end;
+        width: 80%;
+        @include font(400, 11px, 1.18);
+        padding: 0;
+        margin: 0;
+    }
+
+    &__login {}
+}

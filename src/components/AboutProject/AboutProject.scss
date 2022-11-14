@@ -1,0 +1,181 @@
+@import '../vars.scss';
+
+.section {
+    padding: 110px 70px;
+    height: 100%;
+    margin: 0 auto;
+
+    @media screen and (max-width: $breakpoint768) {
+        padding: 90px 50px;
+    }
+
+    @media screen and (max-width: $breakpoint320) {
+        padding: 70px 18px;
+    }
+
+    &__title {
+        margin: 0;
+        color: $white-color;
+        @include font(400, 22px, 1.23);
+        border-bottom: 1px solid $border;
+        padding-bottom: 23px;
+
+        @media screen and (max-width: $breakpoint320) {
+            @include font(400, 18px, 1.23);
+            padding-bottom: 28px;
+        }
+    }
+
+    &__about {
+        max-height: 608px;
+
+        @media screen and (max-width: $breakpoint480) {
+            padding: 70px 18px;
+        }
+
+        &_container {
+            display: grid;
+            grid-template-areas:
+                "A B"
+                "C D";
+            gap: 26px 40px;
+            margin-top: 70px;
+            margin-bottom: 110px;
+            color: $white-color;
+
+            @media screen and (max-width: $breakpoint768) {
+                gap: 22px 30px;
+                margin-bottom: 93px;
+            }
+
+            @media screen and (max-width: $breakpoint550) {
+                @include flex(column, center, start);
+                margin: 60px 0;
+                gap: 16px;
+            }
+        }
+
+        &_subtitle {
+            @include font(400, 20px, 1.2);
+            margin: 0;
+
+            @media screen and (max-width: $breakpoint320) {
+                @include font(400, 18px, 1.2);
+            }
+
+            &-amount {
+                grid-area: A;
+            }
+
+            &-duration {
+                grid-area: B;
+
+                @media screen and (max-width: $breakpoint320) {
+                    margin-top: 40px;
+                }
+            }
+        }
+
+        &_body {
+            @include font(400, 14px, 1.42);
+
+            @media screen and (max-width: $breakpoint768) {
+                @include font(400, 12px, 1.5);
+            }
+
+            @media screen and (max-width: $breakpoint320) {
+                @include font(400, 10px, 1.45);
+            }
+
+            &-amount {
+                grid-area: C;
+            }
+
+            &-duration {
+                grid-area: D;
+
+            }
+        }
+    }
+}
+
+.about {
+    &__plan {
+        @include font(400, 20px, 1.2);
+        display: grid;
+        grid-template-areas:
+            "A B"
+            "C D";
+        gap: 14px 0;
+        grid-template-columns: 1fr 4fr;
+
+        @media screen and (max-width: $breakpoint410) {
+            grid-template-columns: 1fr 2fr;
+        }
+
+        &_backend {
+            @include flex(row, center, center);
+            height: 36px;
+            margin: 0;
+            box-sizing: border-box;
+            background-color: $btn-color_green;
+            grid-area: A;
+
+            @media screen and (max-width: $breakpoint768) {
+                @include font(400, 14px, 1.2);
+            }
+
+            @media screen and (max-width: $breakpoint410) {
+                @include font(400, 11px, 1.18);
+            }
+
+            &-text {
+                @include font(500, 20px, 1.2);
+                color: $font_grey;
+                text-align: center;
+                grid-area: C;
+
+                @media screen and (max-width: $breakpoint768) {
+                    @include font(400, 14px, 1.2);
+                }
+
+                @media screen and (max-width: $breakpoint410) {
+                    @include font(400, 11px, 1.18);
+                }
+            }
+        }
+
+        &_frontend {
+            @include flex(row, center, center);
+            height: 36px;
+            margin: 0;
+            box-sizing: border-box;
+            background-color: $bck-color_grey;
+            grid-area: B;
+            color: $white-color;
+
+            @media screen and (max-width: $breakpoint768) {
+                @include font(400, 14px, 1.2);
+            }
+
+            @media screen and (max-width: $breakpoint410) {
+                @include font(400, 11px, 1.18);
+            }
+
+            &-text {
+                @include font(500, 20px, 1.2);
+                color: $font_grey;
+                text-align: center;
+                grid-area: D;
+
+                @media screen and (max-width: $breakpoint768) {
+                    @include font(400, 14px, 1.2);
+                }
+
+                @media screen and (max-width: $breakpoint410) {
+                    @include font(400, 11px, 1.18);
+                }
+            }
+        }
+    }
+}

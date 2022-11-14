@@ -1,0 +1,128 @@
+@import '../vars';
+
+.promo {
+    padding: 70px 75px;
+    color: $white-color;
+    height: 574px;
+    box-sizing: border-box;
+    background-color: $bckg-color_header;
+
+    @media screen and (max-width: $breakpoint768) {
+        max-height: 850px;
+        height: 100%;
+        padding-bottom: 76px;
+    }
+
+    @media screen and (max-width: $breakpoint410) {
+        padding: 70px 10px 30px;
+    }
+
+    &__container {
+        display: grid;
+        grid-template-areas:
+            "A B"
+            "C B";
+
+        @media screen and (max-width: $breakpoint768) {
+            @include flex(column, center, center);
+            text-align: center;
+        }
+    }
+
+    &__title {
+        @include font(400, 50px, 1.16);
+        max-width: 640px;
+        max-height: 174px;
+        grid-area: A;
+        margin: 0;
+
+        @media screen and (max-width: $breakpoint1024) {
+            @include font(400, 42px, 1.25);
+
+        }
+
+        @media screen and (max-width: $breakpoint900) {
+            @include font(400, 38px, 1.25);
+            max-width: 390px;
+        }
+
+        @media screen and (max-width: $breakpoint768) {
+            @include font(400, 40px, 1.25);
+            max-width: 680px;
+        }
+
+        @media screen and (max-width: $breakpoint580) {
+            @include font(400, 32px, 1.25);
+            max-width: 370px;
+        }
+
+        @media screen and (max-width: $breakpoint410) {
+            @include font(400, 30px, 1.27);
+        }
+    }
+
+    &__subtitle {
+
+        @include font(400, 13px, 1.23);
+        opacity: .5;
+        max-width: 320px;
+        grid-area: C;
+        margin: 0;
+
+        @media screen and (max-width: $breakpoint768) {
+            padding-top: 22px;
+        }
+
+        @media screen and (max-width: $breakpoint320) {
+            padding-top: 24px;
+        }
+
+    }
+
+    &__picture {
+        grid-area: B;
+
+        @media screen and (max-width: $breakpoint768) {
+            margin-bottom: 48px;
+        }
+
+        @media screen and (max-width: $breakpoint410) {
+            width: 210px;
+            height: 206px;
+        }
+    }
+
+    &__button {
+        width: 129px;
+        height: 36px;
+        margin-top: 94px;
+        box-sizing: border-box;
+        @include font(500, 12px, 1.33);
+        border: 1px solid rgba(255, 255, 255, .6);
+        border-radius: 3px;
+        vertical-align: middle;
+        color: $white-color;
+        background-color: $bckg-color_header;
+
+        @media screen and (max-width: $breakpoint768) {
+            @include flex(row, center, center);
+            margin: 92px auto 0;
+
+        }
+
+        @media screen and (max-width: $breakpoint460) {
+            margin: 50px auto 0;
+
+        }
+
+        @media screen and (max-width: $breakpoint320) {
+            margin: 80px auto 0;
+
+        }
+
+        &:hover {
+            opacity: 0.6;
+            transition: all .1s;
+        }
+    }
+}

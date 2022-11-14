@@ -1,0 +1,109 @@
+@import '../vars.scss';
+
+.header {
+    @include flex(row, space-between, center);
+    height: 74px;
+    padding: 0 70px;
+    background-color: $bckg-color_header;
+
+    @media screen and (max-width: $breakpoint768) {
+        padding: 0 30px;
+    }
+
+    @media screen and (max-width: $breakpoint320) {
+        padding: 0 14px;
+    }
+
+    &__auth {
+        padding: 0;
+        height: 217px;
+        background-color: $bck-color;
+
+        @media screen and (max-width: $breakpoint900) {
+            height: 379px;
+        }
+
+        @media screen and (max-width: $breakpoint550) {
+            height: 253px;
+        }
+    }
+
+    &__container {
+        width: 31%;
+        height: 100%;
+        margin: 0 auto;
+        padding: 70px 0 40px;
+        box-sizing: border-box;
+
+        @media screen and (max-width: $breakpoint900) {
+            width: 51%;
+            padding: 0 0 40px;
+            @include flex(column, end, start);
+        }
+
+        @media screen and (max-width: $breakpoint550) {
+            width: 100%;
+            padding: 0 30px 80px;
+            @include flex(column, end, center);
+        }
+
+    }
+
+    &__main {
+        background-color: $bck-color;
+    }
+
+    &__title {
+        @include font(500, 24px, 1.21);
+        color: $white-color;
+        margin: 40px 0 0;
+    }
+
+    &__logo {
+        max-width: 38px;
+        max-height: 38px;
+    }
+
+    &__nav {
+        display: flex;
+        width: 183px;
+        height: 32px;
+        @include font(500, 12px, 1.33);
+        color: $white-color;
+
+        @media screen and (max-width: $breakpoint320) {
+            width: 132px;
+            height: 32px;
+        }
+
+        &_link {
+            @include flex(row, center, center);
+            box-sizing: border-box;
+            padding: 20px 8px;
+            text-decoration: none;
+
+            @media screen and (max-width: $breakpoint320) {
+                padding: 12px 5px;
+            }
+
+            &-reg {
+                color: $white-color;
+                width: 77px;
+                height: 32px;
+                margin-right: 30px;
+
+                @media screen and (max-width: $breakpoint320) {
+                    margin-right: 15px;
+                }
+            }
+
+            &-in {
+                color: #000;
+                width: 76px;
+                height: 32px;
+                background-color: $btn-color_green;
+                border-radius: 3px;
+            }
+        }
+    }
+}

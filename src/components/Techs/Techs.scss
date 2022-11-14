@@ -1,0 +1,97 @@
+@import '../vars';
+
+.section {
+    &__techs {
+        padding: 100px 70px;
+        height: 100%;
+        margin: 0 auto;
+        color: $white-color;
+        text-align: center;
+        background-color: $bck-color_tech;
+
+        &_title {
+            text-align: start;
+        }
+
+        @media screen and (max-width: $breakpoint768) {
+            padding: 90px 50px;
+        }
+
+        @media screen and (max-width: $breakpoint410) {
+            padding: 70px 18px;
+        }
+
+        &_subtitle {
+            margin: 90px 0 26px;
+            @include font(400, 50px, 1.16);
+
+            @media screen and (max-width: $breakpoint768) {
+                margin: 80px 0 22px;
+            }
+
+            @media screen and (max-width: $breakpoint410) {
+                @include font(400, 30px, 1.2);
+                margin: 60px 0 24px;
+            }
+        }
+
+        &_body {
+            @include font(400, 14px, 1.43);
+            margin: 0 auto 100px;
+            max-width: 460px;
+
+            @media screen and (max-width: $breakpoint768) {
+                @include font(400, 12px, 1.5);
+                margin: 0 auto 83px;
+            }
+
+            @media screen and (max-width: $breakpoint410) {
+                @include font(400, 11px, 1.45);
+                margin: 0 auto 50px;
+            }
+        }
+
+        &_list {
+            margin: 0 auto;
+            display: flex;
+            gap: 10px;
+            list-style: none;
+            justify-content: center;
+            padding: 0;
+
+            @media screen and (max-width: $breakpoint768) {
+                @include font(400, 24px, 1.5);
+                margin: 0 auto;
+            }
+
+            @media screen and (max-width: $breakpoint767) {
+                flex-wrap: wrap;
+            }
+
+            @media screen and (max-width: $breakpoint320) {
+                @include font(400, 11px, 1.45);
+                margin: 0 auto;
+                max-width: 190px;
+                justify-content: start;
+            }
+        }
+
+        &_el {
+            @include flex(row, center, center);
+            width: 90px;
+            height: 60px;
+            background-color: $bck-color_grey;
+            border-radius: 10px;
+            @include font(400, 14px, 1.21);
+
+            @media screen and (max-width: $breakpoint768) {
+                @include font(400, 12px, 1.25);
+
+            }
+
+            &:hover {
+                opacity: .7;
+            }
+        }
+    }
+}

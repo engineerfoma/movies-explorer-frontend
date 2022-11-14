@@ -1,0 +1,71 @@
+@import '../vars';
+
+.form__submit {
+    @include flex(column, end, center);
+    width: 100%;
+
+    &_login {
+        padding-top: 179px;
+
+        @media screen and (max-width: $breakpoint550) {
+            padding-top: 267px;
+
+        }
+    }
+
+    &_register {
+        padding-top: 69px;
+
+        @media screen and (max-width: $breakpoint550) {
+            padding-top: 157px;
+
+        }
+    }
+
+    &_button {
+        @include font(500, 14px, 1.21);
+        width: 100%;
+        height: 45px;
+        color: $white-color;
+        background-color: $color-btn;
+        border-radius: 3px;
+        border: none;
+
+        @media screen and (max-width: $breakpoint550) {
+            @include font(500, 12px, 1.25);
+
+        }
+
+        &:hover {
+            cursor: pointer;
+            opacity: .8;
+        }
+    }
+
+    &_label {
+        @include font(400, 14px, 1.21);
+        color: $font_grey;
+        margin-top: 16px;
+
+        @media screen and (max-width: $breakpoint550) {
+            @include font(500, 12px, 1.25);
+            margin-top: 14px;
+        }
+    }
+
+    &_link {
+        margin-left: 6px;
+        text-decoration: none;
+        color: $color-btn;
+
+        @media screen and (max-width: $breakpoint550) {
+            margin-left: 7px;
+        }
+
+        &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+            opacity: .8;
+        }
+    }
+}
