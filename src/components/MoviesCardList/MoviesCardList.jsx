@@ -1,17 +1,18 @@
 import './MoviesCardList.scss';
-import MoviesCard from '../MoviesCard/MoviesCard';
-import movies from '../../utils/constants.js';
+import Movie from '../MoviesCard/MoviesCard';
+// import movies from '../../utils/constants';
 
-function MoviesCardList() {
+function MoviesCard({ movies }) {
+
+    
     return (
         <section className="gallery">
             <ul className="gallery__list">
                 {movies.map((item) => {
                     return (
-                        <MoviesCard
+                        <Movie
                             movie={item}
                             key={item._id}
-                        // remove={true}
                         />)
                 })}
             </ul>
@@ -19,4 +20,4 @@ function MoviesCardList() {
     )
 }
 
-export default MoviesCardList;
+export default MoviesCard;
