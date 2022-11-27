@@ -10,31 +10,22 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Footer from '../Footer/Footer';
 import NotFound from '../NotFoundPage/NotFoundPage';
-import { getMovies } from '../../utils/moviesApi';
 
 function App() {
-
-  const [loggedIn, setLoggetIn] = useState(true);
-  const [movies, setMovies] = useState([]);
+  // const [loggedIn, setLoggetIn] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
-  const history = useHistory();
+  // const history = useHistory();
 
-  useEffect(() => {
-    if (loggedIn) {
-      history.push('/movies');
-      setIsLoading(true);
-      getMovies()
-        .then(res => {
-          res.json();
-          // setMovies(res);
-        })
-        .catch(err => console.log(`Ошибка: ${err}`))
-        .finally(() => {
-          setIsLoading(false);
-        })
-    }
-  }, [loggedIn, history])
+  const handlerGetMovies = () => {
+
+  }
+
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     history.push('/movies');
+  //   }
+  // }, [])
 
   return (
     <div className="page">
@@ -46,8 +37,9 @@ function App() {
         </Route>
         <Route path="/movies">
           <Movies
-            movies={movies}
-            isLoading={isLoading} />
+            setIsLoading={setIsLoading}
+            isLoading={isLoading}
+          />
         </Route>
         <Route path="/saved-movies">
           <SavedMovies />

@@ -1,18 +1,18 @@
 import './MoviesCardList.scss';
 import Movie from '../MoviesCard/MoviesCard';
-// import movies from '../../utils/constants';
 
-function MoviesCard({ movies }) {
+function MoviesCard({ filteredMovies }) {
 
     
     return (
         <section className="gallery">
             <ul className="gallery__list">
-                {movies.map((item) => {
+                {filteredMovies.map((item) => {
                     return (
                         <Movie
                             movie={item}
-                            key={item._id}
+                            key={item.id}
+                            remove={false}
                         />)
                 })}
             </ul>
