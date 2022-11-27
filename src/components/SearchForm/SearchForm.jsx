@@ -2,19 +2,19 @@ import './SearchForm.scss';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import ValidationForm from '../../utils/validationForm';
 
-function SearchForm( { onSubmit }) {
+function SearchForm({ onSubmit, handlerToggleCheckbox, stateCheckbox, errorMessage }) {
 
-    const { values, errors, isValid, handleChange } = ValidationForm();
+    const { values, errors, handleChange } = ValidationForm();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
         onSubmit(values.searchFilm);
     }
 
     return (
         <section className="search">
-            <form className="search__form" onSubmit={handleSubmit} isvalid={isValid}>
+            <form className="search__form" onSubmit={handleSubmit} >
                 <input
                     type="text"
                     id="search-input"
@@ -22,13 +22,18 @@ function SearchForm( { onSubmit }) {
                     placeholder="Фильм"
                     className="search__input-movie"
                     onChange={handleChange}
-                    value={values.searchFilm || ""}
-                    errormessage={errors.name}
-                 
                 />
-                <button type="submit" className="search__button"/>
+                <button
+                    type="submit"
+                    className="search__button"
+
+                />
+            {errorMessage ? <span className="search__form_error search__form_error-search">{errorMessage}</span> : ""}
             </form>
-            <FilterCheckbox />
+            <FilterCheckbox
+                handlerToggleCheckbox={handlerToggleCheckbox}
+                isToggleCheckbox={stateCheckbox}
+            />
         </section>
     )
 }

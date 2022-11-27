@@ -13,13 +13,11 @@ import NotFound from '../NotFoundPage/NotFoundPage';
 
 function App() {
   // const [loggedIn, setLoggetIn] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
+  
 
   // const history = useHistory();
 
-  const handlerGetMovies = () => {
 
-  }
 
   // useEffect(() => {
   //   if (loggedIn) {
@@ -37,8 +35,6 @@ function App() {
         </Route>
         <Route path="/movies">
           <Movies
-            setIsLoading={setIsLoading}
-            isLoading={isLoading}
           />
         </Route>
         <Route path="/saved-movies">
