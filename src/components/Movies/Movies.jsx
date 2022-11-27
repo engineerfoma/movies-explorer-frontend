@@ -17,23 +17,26 @@ function Movies() {
 
     const windowWidth = useFormWithValidation().width;
 
-    const handlerToggleCheckbox = () => {
-        setStateCheckbox(!stateCheckbox);
-        localStorage.setItem('setStateCheckbox', !stateCheckbox);
-    };
-
     const handlerFilteredMovies = (movies, value, checked) => {
-        const filter = movies.filter(movie => movie.nameRU.toLowerCase().includes(value.toLowerCase()));
+        const filterMovies = movies.filter(
+            movie => movie.nameRU.toLowerCase().includes(value.toLowerCase()) ||
+                movie.nameEN.toLowerCase().includes(value.toLowerCase())
+        );
         setFilteredMovies(
             checked ?
-                filter.filter(movie => movie.duration <= 40)
+                filterMovies.filter(movie => movie.duration <= 40)
                 :
-                filter
+                filterMovies
         );
     };
 
+    // const handleChange = (e) => {
+    //     setValueSearch(e.target.value);
+    // }
+
     const handleSubmit = (valueSearch) => {
         if (valueSearch) {
+            setErrorMessage(null);
             setValueSearch(valueSearch);
             localStorage.setItem('valueSearch', valueSearch);
             localStorage.setItem('stateCheckbox', stateCheckbox);
@@ -58,32 +61,42 @@ function Movies() {
         }
     }
 
+    const handlerToggleCheckbox = () => {
+        setStateCheckbox(!stateCheckbox);
+        localStorage.setItem('stateCheckbox', !stateCheckbox);
+    };
+    
+    useEffect(() => {
+        if (localStorage.getItem('valueSearch')) {
+            setValueSearch(localStorage.getItem('valueSearch'));
+        }
+
+        if (localStorage.getItem('filteredMovies')) {
+            setFilteredMovies(JSON.parse(localStorage.getItem('filteredMovies')));
+        };
+
+        localStorage.getItem('stateCheckbox') === 'true' ? setStateCheckbox(true) : setStateCheckbox(false);
+    }, []);
+
     useEffect(() => {
         const inputValue = localStorage.getItem('valueSearch');
         const resultMovies = JSON.parse(localStorage.getItem('filteredMovies'));
         if (inputValue && resultMovies) {
             handlerFilteredMovies(resultMovies, inputValue, stateCheckbox);
         }
-    }, [valueSearch, stateCheckbox]);
-
-    useEffect(() => {
-        if (localStorage.getItem('filteredMovies')) {
-            setFilteredMovies(JSON.parse(localStorage.getItem('filteredMovies')));
-        };
-        localStorage.getItem('isToggleCheckbox') ? setStateCheckbox(true) : setStateCheckbox(false);
-        if (localStorage.getItem('valueSearch')) {
-            setValueSearch(localStorage.getItem('valueSearch'));
-        }
-    }, []);
+    }, [stateCheckbox, valueSearch]);
 
     return (
         <main>
             <SearchForm
                 onSubmit={handleSubmit}
                 handlerToggleCheckbox={handlerToggleCheckbox}
-                isToggleCheckbox={stateCheckbox}
+                stateCheckbox={stateCheckbox}
                 errorMessage={errorMessage}
-                />
+                inputValue={valueSearch}
+                // handleChange={handleChange}
+                saveFilm={false}
+            />
             {isLoading && <Preloader />}
 
             <MoviesCardList

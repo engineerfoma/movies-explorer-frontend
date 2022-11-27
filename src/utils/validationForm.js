@@ -27,6 +27,7 @@ function useFormWithValidation() {
         //         setErrors({ ...errors, [name]: "Пожалуйста, заполните это поле" });
         //     }
         // }
+        
 
         setIsValid(e.target.closest("form").checkValidity());
     }

@@ -1,8 +1,9 @@
-import './SearchForm.scss';
-import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import ValidationForm from '../../utils/validationForm';
+import { useEffect } from 'react'
+import './SearchForm.scss'
+import FilterCheckbox from '../FilterCheckbox/FilterCheckbox'
+import ValidationForm from '../../utils/validationForm'
 
-function SearchForm({ onSubmit, handlerToggleCheckbox, stateCheckbox, errorMessage }) {
+function SearchForm({ onSubmit, handlerToggleCheckbox, stateCheckbox, errorMessage, inputValue }) {
 
     const { values, errors, handleChange } = ValidationForm();
 
@@ -11,6 +12,10 @@ function SearchForm({ onSubmit, handlerToggleCheckbox, stateCheckbox, errorMessa
 
         onSubmit(values.searchFilm);
     }
+
+    useEffect(() => {
+     
+    }, [])
 
     return (
         <section className="search">
@@ -32,7 +37,7 @@ function SearchForm({ onSubmit, handlerToggleCheckbox, stateCheckbox, errorMessa
             </form>
             <FilterCheckbox
                 handlerToggleCheckbox={handlerToggleCheckbox}
-                isToggleCheckbox={stateCheckbox}
+                stateCheckbox={stateCheckbox}
             />
         </section>
     )
