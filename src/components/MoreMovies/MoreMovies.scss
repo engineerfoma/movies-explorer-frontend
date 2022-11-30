@@ -15,12 +15,31 @@
     &__button {
         padding: 0;
         width: 100%;
+        max-width: 1140px;
+        @include flex(row, center, center);
+        margin: 0 auto;
         height: 36px;
         @include font(500, 12px, 1.25);
         color: $white-color;
         background-color: $input_search;
         border: none;
         border-radius: 6px;
+
+        @media screen and (max-width: $breakpoint1279) {
+            max-width: 750px;
+        }
+
+        @media screen and (max-width: $breakpoint900) {
+            max-width: 708px;
+        }
+
+        @media screen and (max-width: $breakpoint767) {
+            max-width: 342px;
+        }
+
+        @media screen and (max-width: $breakpoint410) {
+            max-width: 300px;
+        }
 
         &:hover {
             cursor: pointer;

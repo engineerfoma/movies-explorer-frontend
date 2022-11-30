@@ -2,28 +2,27 @@ import React, { useState, useEffect } from 'react'
 import SearchForm from '../SearchForm/SearchForm'
 import Preloader from '../Preloader/Preloader'
 import MoviesCardList from '../MoviesCardList/MoviesCardList'
-import MoreMovies from '../MoreMovies/MoreMovies'
 import { getMovies } from '../../utils/moviesApi'
-import useFormWithValidation from '../../utils/validationForm'
 import { errorMessageFormValidate } from '../../utils/constants'
 import './Movies.scss'
 
-function Movies() {
+function Movies({ windowWidth }) {
 
     const [isLoading, setIsLoading] = useState(false);
     const [valueSearch, setValueSearch] = useState('');
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [stateCheckbox, setStateCheckbox] = useState(false);
+    // const [checkboxMovies, setCheckboxMovies] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
     const [isEmpty, setIsEmpty] = useState(false);
     const [isBadConnection, setIsBadConnection] = useState(false);
 
-    const windowWidth = useFormWithValidation().width;
-
     const handlerFilteredMovies = (movies, value, checked) => {
         const filterMovies = movies.filter(
-            movie => movie.nameRU.toLowerCase().includes(value.toLowerCase()) ||
-                movie.nameEN.toLowerCase().includes(value.toLowerCase())
+            movie => {
+                return movie.nameRU.toLowerCase().includes(value.toLowerCase()) ||
+                    movie.nameEN.toLowerCase().includes(value.toLowerCase())
+            }
         );
         setFilteredMovies(
             checked ?
@@ -31,6 +30,7 @@ function Movies() {
                 :
                 filterMovies
         );
+        checkFoundMovies(filterMovies);
     };
 
     const getMoviesList = (valueSearch) => {
@@ -49,7 +49,7 @@ function Movies() {
                     })
                     .catch(err => {
                         setIsBadConnection(true);
-                        console.log(`Ошибка: ${err}`)
+                        console.log(`Ошибка: ${err}`);
                     })
                     .finally(() => {
                         setIsLoading(false);
@@ -67,20 +67,31 @@ function Movies() {
 
     const handleChange = (e) => setValueSearch(e.target.value);
 
-
     const handlerToggleCheckbox = () => {
         setStateCheckbox(!stateCheckbox);
         localStorage.setItem('stateCheckbox', !stateCheckbox);
     };
 
+    // useEffect(() => {
+    //     let count;
+    //     if (windowWidth >= 1280) {
+    //      count = 12
+    //     } else if (windowWidth >= 768) {
+    //      count = 8
+    //     } else if (windowWidth >= 320) {
+    //      count = 5
+    //     }
+    //    filteredMovies.length > count ? setDisplayMovies(filteredMovies.slice(0,count)) : setDisplayMovies(filteredMovies);
+    //   }, [windowWidth, filteredMovies])
+
     useEffect(() => {
+        if (localStorage.getItem('filteredMovies')) {
+            setFilteredMovies(JSON.parse(localStorage.getItem('filteredMovies')));
+        }
+
         if (localStorage.getItem('valueSearch')) {
             setValueSearch(localStorage.getItem('valueSearch'));
         }
-
-        if (localStorage.getItem('filteredMovies')) {
-            setFilteredMovies(JSON.parse(localStorage.getItem('filteredMovies')));
-        };
 
         localStorage.getItem('stateCheckbox') === 'true' ? setStateCheckbox(true) : setStateCheckbox(false);
     }, []);
@@ -90,9 +101,8 @@ function Movies() {
         const resultMovies = JSON.parse(localStorage.getItem('filteredMovies'));
         if (inputValue && resultMovies) {
             handlerFilteredMovies(resultMovies, inputValue, stateCheckbox);
-            checkFoundMovies(filteredMovies);
         }
-    }, [stateCheckbox, valueSearch, filteredMovies]);
+    }, [stateCheckbox, valueSearch]);
 
     return (
         <main>
@@ -104,30 +114,26 @@ function Movies() {
                 handleChange={handleChange}
                 saveFilm={false}
                 getMoviesList={getMoviesList}
+                checkFoundMovies={checkFoundMovies}
+                filteredMovies={filteredMovies}
             />
             {isLoading && <Preloader />}
-            {isEmpty ?
+            {isEmpty && !isBadConnection &&
                 <span className="movies__error movies__error_not-found">Ничего не найдено</span>
-                :
-                ""
             }
 
-            {isBadConnection ?
+            {isBadConnection &&
                 <span className="movies__error movies__error_bad-connection">Во время запроса произошла ошибка.
                     Возможно, проблема с соединением или сервер недоступен.
                     Подождите немного и попробуйте ещё раз</span>
-                :
-                ""
             }
-            {!isEmpty && !isBadConnection ?
+            {!isEmpty && !isBadConnection &&
                 <MoviesCardList
+                    setFilteredMovies={setFilteredMovies}
                     filteredMovies={filteredMovies}
-                    errorMessage={errorMessage}
+                    windowWidth={windowWidth}
                 />
-                :
-                ""
             }
-            {/* <MoreMovies /> */}
         </main>
     )
 }

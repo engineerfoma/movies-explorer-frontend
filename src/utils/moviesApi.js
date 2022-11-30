@@ -1,4 +1,4 @@
-import { MOVIES_URL } from "./constants";
+import { MOVIES_URL } from "./constants"
 
 const headers = {
     'Content-Type': 'application/json',
@@ -6,7 +6,7 @@ const headers = {
 
 const _checkResponse = (res) => {
     if (res.ok) {
-        return
+        return res.json();
     }
        else {
         return Promise.reject(new Error(`Ошибка: ${res.status}: ${res.statusText}`)); }

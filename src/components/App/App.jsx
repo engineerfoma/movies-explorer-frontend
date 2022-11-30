@@ -1,20 +1,21 @@
 import './App.scss';
 import React, { useEffect, useState } from 'react';
-import { Switch, Route, useHistory } from 'react-router-dom';
-import Header from '../Header/Header';
-import Login from '../Login/Login';
-import Register from '../Register/Register';
-import Main from '../Main/Main';
-import Movies from '../Movies/Movies';
-import SavedMovies from '../SavedMovies/SavedMovies';
-import Profile from '../Profile/Profile';
-import Footer from '../Footer/Footer';
-import NotFound from '../NotFoundPage/NotFoundPage';
+import { Switch, Route, useHistory } from 'react-router-dom'
+import Header from '../Header/Header'
+import Login from '../Login/Login'
+import Register from '../Register/Register'
+import Main from '../Main/Main'
+import Movies from '../Movies/Movies'
+import SavedMovies from '../SavedMovies/SavedMovies'
+import Profile from '../Profile/Profile'
+import Footer from '../Footer/Footer'
+import NotFound from '../NotFoundPage/NotFoundPage'
+import useWindowSize from '../../utils/useWindowSize'
 
 function App() {
   // const [loggedIn, setLoggetIn] = useState(true);
   
-
+  const windowWidth = useWindowSize().width;
   // const history = useHistory();
 
 
@@ -35,10 +36,13 @@ function App() {
         </Route>
         <Route path="/movies">
           <Movies
+          windowWidth={windowWidth}
           />
         </Route>
         <Route path="/saved-movies">
-          <SavedMovies />
+          <SavedMovies 
+          windowWidth={windowWidth}
+          />
         </Route>
         <Route path="/signup">
           <Register />

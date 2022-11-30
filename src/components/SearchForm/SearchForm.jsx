@@ -3,7 +3,7 @@ import './SearchForm.scss'
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox'
 // import ValidationForm from '../../utils/validationForm'
 
-function SearchForm({ handlerToggleCheckbox, stateCheckbox, errorMessage, inputValue, handleChange, getMoviesList }) {
+function SearchForm({ handlerToggleCheckbox, stateCheckbox, errorMessage, inputValue, handleChange, getMoviesList, filteredMovies, checkFoundMovies }) {
 
     // const { values, errors, handleChange } = ValidationForm();
 
@@ -11,10 +11,10 @@ function SearchForm({ handlerToggleCheckbox, stateCheckbox, errorMessage, inputV
         e.preventDefault();
         getMoviesList(inputValue);
     }
-    
+
     // useEffect(() => {
-     
-    // }, [])
+    //     checkFoundMovies(filteredMovies);
+    // }, [checkFoundMovies, filteredMovies])
 
     return (
         <section className="search">
@@ -33,7 +33,7 @@ function SearchForm({ handlerToggleCheckbox, stateCheckbox, errorMessage, inputV
                     className="search__button"
 
                 />
-            {errorMessage ? <span className="search__form_error search__form_error-search">{errorMessage}</span> : ""}
+                {errorMessage ? <span className="search__form_error search__form_error-search">{errorMessage}</span> : ""}
             </form>
             <FilterCheckbox
                 handlerToggleCheckbox={handlerToggleCheckbox}
