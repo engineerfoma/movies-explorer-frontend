@@ -54,7 +54,6 @@ function MoviesCard({ filteredMovies, windowWidth }) {
                             <Movie
                                 movie={item}
                                 key={item.id}
-                                remove={false}
                             />)
                     })}
                 </ul>
