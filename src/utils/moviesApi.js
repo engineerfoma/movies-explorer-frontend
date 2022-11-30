@@ -6,7 +6,7 @@ const headers = {
 
 const _checkResponse = (res) => {
     if (res.ok) {
-        return res.json()
+        return
     }
        else {
         return Promise.reject(new Error(`Ошибка: ${res.status}: ${res.statusText}`)); }

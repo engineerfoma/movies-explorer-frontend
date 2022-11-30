@@ -1,25 +1,24 @@
 import { useEffect } from 'react'
 import './SearchForm.scss'
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox'
-import ValidationForm from '../../utils/validationForm'
+// import ValidationForm from '../../utils/validationForm'
 
-function SearchForm({ onSubmit, handlerToggleCheckbox, stateCheckbox, errorMessage, inputValue }) {
+function SearchForm({ handlerToggleCheckbox, stateCheckbox, errorMessage, inputValue, handleChange, getMoviesList }) {
 
-    const { values, errors, handleChange } = ValidationForm();
+    // const { values, errors, handleChange } = ValidationForm();
 
-    const handleSubmit = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
-
-        onSubmit(values.searchFilm);
+        getMoviesList(inputValue);
     }
-
-    useEffect(() => {
+    
+    // useEffect(() => {
      
-    }, [])
+    // }, [])
 
     return (
         <section className="search">
-            <form className="search__form" onSubmit={handleSubmit} >
+            <form className="search__form" onSubmit={onSubmit} >
                 <input
                     type="text"
                     id="search-input"
@@ -27,6 +26,7 @@ function SearchForm({ onSubmit, handlerToggleCheckbox, stateCheckbox, errorMessa
                     placeholder="Фильм"
                     className="search__input-movie"
                     onChange={handleChange}
+                    value={inputValue || ""}
                 />
                 <button
                     type="submit"

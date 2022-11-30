@@ -6,6 +6,7 @@ import MoreMovies from '../MoreMovies/MoreMovies'
 import { getMovies } from '../../utils/moviesApi'
 import useFormWithValidation from '../../utils/validationForm'
 import { errorMessageFormValidate } from '../../utils/constants'
+import './Movies.scss'
 
 function Movies() {
 
@@ -14,6 +15,8 @@ function Movies() {
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [stateCheckbox, setStateCheckbox] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [isEmpty, setIsEmpty] = useState(false);
+    const [isBadConnection, setIsBadConnection] = useState(false);
 
     const windowWidth = useFormWithValidation().width;
 
@@ -30,11 +33,7 @@ function Movies() {
         );
     };
 
-    // const handleChange = (e) => {
-    //     setValueSearch(e.target.value);
-    // }
-
-    const handleSubmit = (valueSearch) => {
+    const getMoviesList = (valueSearch) => {
         if (valueSearch) {
             setErrorMessage(null);
             setValueSearch(valueSearch);
@@ -48,7 +47,10 @@ function Movies() {
                         localStorage.setItem('movies', JSON.stringify(res));
                         localStorage.setItem('filteredMovies', JSON.stringify(res));
                     })
-                    .catch(err => console.log(`Ошибка: ${err}`))
+                    .catch(err => {
+                        setIsBadConnection(true);
+                        console.log(`Ошибка: ${err}`)
+                    })
                     .finally(() => {
                         setIsLoading(false);
                     })
@@ -61,11 +63,16 @@ function Movies() {
         }
     }
 
+    const checkFoundMovies = (filteredMovies) => filteredMovies.length === 0 ? setIsEmpty(true) : setIsEmpty(false);
+
+    const handleChange = (e) => setValueSearch(e.target.value);
+
+
     const handlerToggleCheckbox = () => {
         setStateCheckbox(!stateCheckbox);
         localStorage.setItem('stateCheckbox', !stateCheckbox);
     };
-    
+
     useEffect(() => {
         if (localStorage.getItem('valueSearch')) {
             setValueSearch(localStorage.getItem('valueSearch'));
@@ -83,27 +90,44 @@ function Movies() {
         const resultMovies = JSON.parse(localStorage.getItem('filteredMovies'));
         if (inputValue && resultMovies) {
             handlerFilteredMovies(resultMovies, inputValue, stateCheckbox);
+            checkFoundMovies(filteredMovies);
         }
-    }, [stateCheckbox, valueSearch]);
+    }, [stateCheckbox, valueSearch, filteredMovies]);
 
     return (
         <main>
             <SearchForm
-                onSubmit={handleSubmit}
                 handlerToggleCheckbox={handlerToggleCheckbox}
                 stateCheckbox={stateCheckbox}
                 errorMessage={errorMessage}
                 inputValue={valueSearch}
-                // handleChange={handleChange}
+                handleChange={handleChange}
                 saveFilm={false}
+                getMoviesList={getMoviesList}
             />
             {isLoading && <Preloader />}
+            {isEmpty ?
+                <span className="movies__error movies__error_not-found">Ничего не найдено</span>
+                :
+                ""
+            }
 
-            <MoviesCardList
-                filteredMovies={filteredMovies}
-                errorMessage={errorMessage}
-            />
-            <MoreMovies />
+            {isBadConnection ?
+                <span className="movies__error movies__error_bad-connection">Во время запроса произошла ошибка.
+                    Возможно, проблема с соединением или сервер недоступен.
+                    Подождите немного и попробуйте ещё раз</span>
+                :
+                ""
+            }
+            {!isEmpty && !isBadConnection ?
+                <MoviesCardList
+                    filteredMovies={filteredMovies}
+                    errorMessage={errorMessage}
+                />
+                :
+                ""
+            }
+            {/* <MoreMovies /> */}
         </main>
     )
 }
