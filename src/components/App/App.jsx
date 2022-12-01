@@ -1,6 +1,6 @@
 import './App.scss';
 import React, { useEffect, useState } from 'react';
-import { Switch, Route, useHistory } from 'react-router-dom'
+import { Switch, Route, useHistory, Redirect } from 'react-router-dom'
 import CurrentUserContext from '../../context/CurrentUserContext'
 import ProtectedRoute from '../ProtectedRoute';
 import Header from '../Header/Header'
@@ -18,8 +18,8 @@ import mainApi from '../../utils/MainApi'
 function App() {
   const [loggedIn, setLoggetIn] = useState(true);
   const [currentUser, setCurrentUser] = useState('');
-  const windowWidth = useWindowSize().width;
   const [savedMovies, setSavedMovies] = useState([]);
+  const windowWidth = useWindowSize().width;
   const history = useHistory();
 
   const handleSaveMovie = (movie) => {
@@ -29,6 +29,7 @@ function App() {
         writeSavedMovies();
         setSavedMovies([...savedMovies, ...res])
       })
+      .catch((err) => console.log(`Ошибка: ${err}`));
   }
 
   const handleRemoveMovie = (movieId) => {
@@ -58,6 +59,7 @@ function App() {
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
         <Header
+          loggedIn={loggedIn}
         />
         <Switch>
           <Route exact path="/">
@@ -68,29 +70,45 @@ function App() {
             path="/movies"
             component={Movies}
             windowWidth={windowWidth}
-            likedMovie={savedMovies}
-            handleAddLikeMovie={handleSaveMovie}
-            handleRemoveLikeMovie={handleRemoveMovie}
+            savedMovie={savedMovies}
+            handleSaveMovie={handleSaveMovie}
+            handleRemoveMovie={handleRemoveMovie}
           />
           <ProtectedRoute
             exact
             path="/saved-movies"
             component={SavedMovies}
             windowWidth={windowWidth}
-            likedMovie={savedMovies}
-            handleRemoveLikeMovie={handleRemoveMovie}
+            savedMovie={savedMovies}
+            handleRemoveMovie={handleRemoveMovie}
           />
-          <Route path="/signup">
-            <Register />
-          </Route>
-          <Route path="/signin">
-            <Login />
-          </Route>
           <ProtectedRoute
             exact
             path="/profile"
             component={Profile}
           />
+          <Route path="/signup">
+            {loggedIn ?
+              <Redirect to="/movies" />
+              :
+              <Register />
+            }
+          </Route>
+
+          <Route path="/signin">
+            {loggedIn ?
+              <Redirect to="movies" />
+              :
+              <Login />
+            }
+          </Route>
+          <Route>
+            {loggedIn ? (
+              <Redirect to="/" />
+            ) : (
+              <Redirect to="/signin" />
+            )}
+          </Route>
           <Route path="*">
             {NotFound}
           </Route>

@@ -67,11 +67,12 @@ function MoviesCard({
                                     handleAddLikeMovie={handleSaveMovie}
                                     handleRemoveLikeMovie={handleRemoveMovie}
                                     savedMovies={savedMovies}
+                                    savePage={false}
                                 />)
                         })
                     )}
                     {history.location.pathname === "/saved-movies" && (
-                        displayMovies.map((item) => {
+                        savedMovies.map((item) => {
                             return (
                                 <Movie
                                     movie={item}
@@ -79,6 +80,7 @@ function MoviesCard({
                                     handleAddLikeMovie={handleSaveMovie}
                                     handleRemoveLikeMovie={handleRemoveMovie}
                                     savedMovies={savedMovies}
+                                    savePage={true}
                                 />)
                         })
 

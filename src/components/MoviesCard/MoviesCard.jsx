@@ -1,35 +1,45 @@
 import './MoviesCard.scss'
 import { useHistory } from 'react-router-dom';
 import { MOVIES_URL } from "../../utils/constants"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function MoviesCard({
     movie,
     handleSaveMovie,
     handleRemoveMovie,
-    savedMovies
+    savedMovies,
+    savePage
 }) {
 
     const history = useHistory();
 
     const [activeButton, setActiveButton] = useState(true);
+    const [savedMovie, setSavedMovie] = useState([]);
 
     const getTimeFromMins = (duration) => {
         let hours = Math.trunc(duration / 60);
         let minutes = duration % 60;
         return `${hours} ч ${minutes} мин`;
-    }
+    };
+    const duration = getTimeFromMins(movie.duration);
 
-    const duration = getTimeFromMins(movie.duration)
-
-    const handleSaveClick = () => {
+    const handlerToggleSave = () => {
+        savedMovie ?
+            handleDeleteClick(savedMovie._id)
+            :
+            handleSaveMovie(movie);
         setActiveButton(!activeButton);
-        handleSaveMovie(savedMovies)
-    }
+    };
 
     const handleDeleteClick = () => {
         handleRemoveMovie(movie)
-    }
+    };
+
+    useEffect(() => {
+        if(!savePage) {
+            setSavedMovie(savedMovies.find(m => m.movieId === movie.id ))
+          }
+      },[savePage, savedMovies, movie.id])
 
     return (
         <li className="list-element">
@@ -47,7 +57,7 @@ function MoviesCard({
                 )}
             </a>
             {history.location.pathname === "/movies" && (
-                <button type="button" className={`list-element__button_default ${activeButton ? "list-element__button_saved" : ""}`} onClick={handleSaveClick} />
+                <button type="button" className={`list-element__button_default ${activeButton ? "list-element__button_saved" : ""}`} onClick={handlerToggleSave} />
             )}
             {history.location.pathname === "/saved-movies" && (
                 <button type="button" className="list-element__button_default list-element__button_remove" onClick={handleDeleteClick} />

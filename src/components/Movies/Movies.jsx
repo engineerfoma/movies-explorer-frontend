@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import SearchForm from '../SearchForm/SearchForm'
 import Preloader from '../Preloader/Preloader'
 import MoviesCardList from '../MoviesCardList/MoviesCardList'
-import { getMovies } from '../../utils/moviesApi'
+import { getMovies } from '../../utils/MoviesApi'
 import { errorMessageFormValidate } from '../../utils/constants'
 import './Movies.scss'
 
