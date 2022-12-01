@@ -2,8 +2,17 @@ import './MoviesCardList.scss'
 import Movie from '../MoviesCard/MoviesCard'
 import MoreMovies from '../MoreMovies/MoreMovies'
 import { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
-function MoviesCard({ filteredMovies, windowWidth }) {
+function MoviesCard({
+    filteredMovies,
+    windowWidth,
+    handleSaveMovie,
+    handleRemoveMovie,
+    savedMovies
+}) {
+
+    const history = useHistory();
 
     const [numberOfFilms, setNumberOfFilms] = useState({
         quantityMovies: 12,
@@ -49,17 +58,37 @@ function MoviesCard({ filteredMovies, windowWidth }) {
         <>
             <section className="gallery">
                 <ul className="gallery__list">
-                    {displayMovies.map((item) => {
-                        return (
-                            <Movie
-                                movie={item}
-                                key={item.id}
-                            />)
-                    })}
+                    {history.location.pathname === "/movies" && (
+                        displayMovies.map((item) => {
+                            return (
+                                <Movie
+                                    movie={item}
+                                    key={item.id}
+                                    handleAddLikeMovie={handleSaveMovie}
+                                    handleRemoveLikeMovie={handleRemoveMovie}
+                                    savedMovies={savedMovies}
+                                />)
+                        })
+                    )}
+                    {history.location.pathname === "/saved-movies" && (
+                        displayMovies.map((item) => {
+                            return (
+                                <Movie
+                                    movie={item}
+                                    key={item.id}
+                                    handleAddLikeMovie={handleSaveMovie}
+                                    handleRemoveLikeMovie={handleRemoveMovie}
+                                    savedMovies={savedMovies}
+                                />)
+                        })
+
+                    )}
                 </ul>
             </section>
             {
-                !((displayMovies.length === filteredMovies.length) || (displayMovies.length === 0)) && <MoreMovies handleClick={handleClick} />
+                !((displayMovies.length === filteredMovies.length) || (displayMovies.length === 0))
+                &&
+                <MoreMovies handleClick={handleClick} />
             }
         </>
     )

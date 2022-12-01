@@ -6,7 +6,12 @@ import { getMovies } from '../../utils/moviesApi'
 import { errorMessageFormValidate } from '../../utils/constants'
 import './Movies.scss'
 
-function Movies({ windowWidth }) {
+function Movies({
+    windowWidth,
+    savedMovies,
+    handleSaveMovie,
+    handleRemoveMovie
+}) {
 
     const [isLoading, setIsLoading] = useState(false);
     const [valueSearch, setValueSearch] = useState('');
@@ -132,6 +137,9 @@ function Movies({ windowWidth }) {
                     setFilteredMovies={setFilteredMovies}
                     filteredMovies={filteredMovies}
                     windowWidth={windowWidth}
+                    handleAddLikeMovie={handleSaveMovie}
+                    handleRemoveLikeMovie={handleRemoveMovie}
+                    savedMovies={savedMovies}
                 />
             }
         </main>
