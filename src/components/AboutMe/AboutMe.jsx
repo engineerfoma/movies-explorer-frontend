@@ -1,5 +1,5 @@
-import "./AboutMe.scss";
-import Avatar from '../../images/avatar.png';
+import "./AboutMe.scss"
+import Avatar from '../../images/avatar.png'
 
 function AboutMe() {
     return (

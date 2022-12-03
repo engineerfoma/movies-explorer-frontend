@@ -1,11 +1,11 @@
 @import '../vars';
 
 .container {
-    @include flex(column, center, start);
+    @include flex(column, center, flex-start);
     width: 100%;
 
     &__profile {
-        @include flex(row, space-between, start);
+        @include flex(row, space-between, flex-start);
         padding: 17px 0 16px;
         border-bottom: 1px solid $border_portfolio;
     }

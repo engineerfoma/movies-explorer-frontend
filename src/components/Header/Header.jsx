@@ -1,10 +1,10 @@
-import { Route, Link } from 'react-router-dom';
-import './Header.scss';
-import Logo from '../../images/logo_main.svg';
-import HeaderAuth from '../HeaderAuth/HeaderAuth';
-import Navigation from '../Navigation/Navigation';
-import Burger from '../Burger/Burger';
-import Account from '../Account/Account';
+import { Route, Link } from 'react-router-dom'
+import './Header.scss'
+import Logo from '../../images/logo_main.svg'
+import HeaderAuth from '../HeaderAuth/HeaderAuth'
+import Navigation from '../Navigation/Navigation'
+import Burger from '../Burger/Burger'
+import Account from '../Account/Account'
 
 function Header() {
     const PathMovies = ['/movies', '/saved-movies', '/profile'];

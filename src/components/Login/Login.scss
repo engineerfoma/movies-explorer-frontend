@@ -1,0 +1,8 @@
+@import '../vars';
+
+.login {
+    &__error {
+        @include font(400, 10px, 1.2);
+        color: $red;
+    }
+}

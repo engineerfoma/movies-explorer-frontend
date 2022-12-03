@@ -10,15 +10,14 @@ function Movies({
     windowWidth,
     savedMovies,
     handleSaveMovie,
-    handleRemoveMovie
+    handleRemoveMovie,
+    errorMessage,
+    setErrorMessage
 }) {
-
     const [isLoading, setIsLoading] = useState(false);
     const [valueSearch, setValueSearch] = useState('');
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [stateCheckbox, setStateCheckbox] = useState(false);
-    // const [checkboxMovies, setCheckboxMovies] = useState([]);
-    const [errorMessage, setErrorMessage] = useState('');
     const [isEmpty, setIsEmpty] = useState(false);
     const [isBadConnection, setIsBadConnection] = useState(false);
 
@@ -76,18 +75,6 @@ function Movies({
         setStateCheckbox(!stateCheckbox);
         localStorage.setItem('stateCheckbox', !stateCheckbox);
     };
-
-    // useEffect(() => {
-    //     let count;
-    //     if (windowWidth >= 1280) {
-    //      count = 12
-    //     } else if (windowWidth >= 768) {
-    //      count = 8
-    //     } else if (windowWidth >= 320) {
-    //      count = 5
-    //     }
-    //    filteredMovies.length > count ? setDisplayMovies(filteredMovies.slice(0,count)) : setDisplayMovies(filteredMovies);
-    //   }, [windowWidth, filteredMovies])
 
     useEffect(() => {
         if (localStorage.getItem('filteredMovies')) {

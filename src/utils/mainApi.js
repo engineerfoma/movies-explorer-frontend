@@ -15,6 +15,26 @@ class Api {
         return Promise.reject(`Ошибка: ${res.status}`);
     }
 
+    getUserInfo() {
+        return fetch(`${this._url}/users/me`, {
+            credentials: 'include',
+            method: 'GET',
+            headers: this._headers
+        })
+            .then(this._checkResponse);
+    }
+
+    setUserInfo({ name, email }) {
+        
+        return fetch(`${this._url}/users/me`, {
+            credentials: 'include',
+            method: 'PATCH',
+            headers: this._headers,
+            body: JSON.stringify({ name, email })
+        })
+            .then(this._checkResponse);
+    }
+
     addSavedMovie(movie) {
         const body = {
             country: movie.country,
@@ -55,7 +75,6 @@ class Api {
         })
             .then(this._checkResponse);
     }
-
 }
 
 const MainApi = new Api(LOCAL_API);

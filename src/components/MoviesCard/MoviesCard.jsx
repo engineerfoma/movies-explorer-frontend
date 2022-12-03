@@ -35,15 +35,15 @@ function MoviesCard({
         handleRemoveMovie(movie)
     };
 
-    useEffect(() => {
-        if(!savePage) {
-            setSavedMovie(savedMovies.find(m => m.movieId === movie.id ))
-          }
-      },[savePage, savedMovies, movie.id])
+    // useEffect(() => {
+    //     if(!savePage) {
+    //         setSavedMovie(savedMovies.find(m => m.movieId === movie.id ))
+    //       }
+    //   },[savePage, savedMovies, movie.id])
 
     return (
         <li className="list-element">
-            <a href={movie.trailerLink} className="list-element_link" target="_blank">
+            <a href={movie.trailerLink} rel="noreferrer" className="list-element_link" target="_blank">
                 <div className="list-element__container">
                     <h3 className="list-element__title">{movie.nameRU}</h3>
                     <span className="list-element__duration">{duration}</span>

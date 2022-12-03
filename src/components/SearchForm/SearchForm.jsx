@@ -33,7 +33,7 @@ function SearchForm({ handlerToggleCheckbox, stateCheckbox, errorMessage, inputV
                     className="search__button"
 
                 />
-                {errorMessage ? <span className="search__form_error search__form_error-search">{errorMessage}</span> : ""}
+                {errorMessage && <span className="search__form_error search__form_error-search">{errorMessage}</span>}
             </form>
             <FilterCheckbox
                 handlerToggleCheckbox={handlerToggleCheckbox}

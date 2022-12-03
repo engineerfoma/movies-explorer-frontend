@@ -38,13 +38,13 @@
         @media screen and (max-width: $breakpoint900) {
             width: 51%;
             padding: 0 0 40px;
-            @include flex(column, end, start);
+            @include flex(column, flex-end, flex-start);
         }
 
         @media screen and (max-width: $breakpoint550) {
             width: 100%;
             padding: 0 30px 80px;
-            @include flex(column, end, center);
+            @include flex(column, flex-end, center);
         }
 
     }

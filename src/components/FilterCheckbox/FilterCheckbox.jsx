@@ -1,4 +1,4 @@
-import './FilterCheckbox.scss';
+import './FilterCheckbox.scss'
 
 function FilterCheckbox({ handlerToggleCheckbox, stateCheckbox }) {
     return (
