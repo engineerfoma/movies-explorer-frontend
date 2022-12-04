@@ -51,6 +51,10 @@
 
     &__main {
         background-color: $bck-color;
+
+        &_logged {
+            background-color: $bckg-color_header;
+        }
     }
 
     &__title {

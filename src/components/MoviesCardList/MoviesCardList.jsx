@@ -64,8 +64,8 @@ function MoviesCard({
                                 <Movie
                                     movie={item}
                                     key={item.id}
-                                    handleAddLikeMovie={handleSaveMovie}
-                                    handleRemoveLikeMovie={handleRemoveMovie}
+                                    handleAddMovie={handleSaveMovie}
+                                    handleRemoveMovie={handleRemoveMovie}
                                     savedMovies={savedMovies}
                                     savePage={false}
                                 />)
@@ -77,8 +77,7 @@ function MoviesCard({
                                 <Movie
                                     movie={item}
                                     key={item.id}
-                                    handleAddLikeMovie={handleSaveMovie}
-                                    handleRemoveLikeMovie={handleRemoveMovie}
+                                    handleRemoveMovie={handleRemoveMovie}
                                     savedMovies={savedMovies}
                                     savePage={true}
                                 />)

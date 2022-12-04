@@ -13,7 +13,7 @@ const _checkResponse = (res) => {
 }
 
 export const getMovies = () => {
-    return fetch(`${MOVIES_URL}beatfilm-movies`, {
+    return fetch(`${MOVIES_URL}/beatfilm-movies`, {
         method: 'GET',
         headers
     })

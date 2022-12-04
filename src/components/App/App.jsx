@@ -17,7 +17,7 @@ import mainApi from '../../utils/MainApi'
 import * as Auth from '../../utils/Auth'
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [savedMovies, setSavedMovies] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
@@ -28,7 +28,7 @@ function App() {
     mainApi
       .addSavedMovie(movie)
       .then((res) => {
-        writeSavedMovies();
+        // writeSavedMovies();
         setSavedMovies([...savedMovies, ...res])
       })
       .catch((err) => console.log(`Ошибка: ${err.message}`));
@@ -43,21 +43,13 @@ function App() {
       .catch((err) => console.log(`Ошибка: ${err.message}`));
   }
 
-  const writeSavedMovies = () => {
-    mainApi
-      .getSavedMovies()
-      .then((res) => {
-        setSavedMovies(res.filter((movie) => movie.owner === currentUser?._id))
-      })
-      .catch((err) => console.log(`Ошибка: ${err.message}`));
-  }
-
   const onLogin = (data) => {
     return Auth
       .authorize(data)
       .then(() => {
         setLoggedIn(true);
         history.push('/movies');
+        localStorage.setItem('loggedIn', true);
       })
       .catch((err) => console.log(`Ошибка: ${err.message}`))
   }
@@ -89,40 +81,99 @@ function App() {
     return { name, email };
   }
 
+
   // useEffect(() => {
-  //   if (loggedIn) {
-  //     history.push("/");
-  //     writeSavedMovies();
-  //     mainApi
-  //       .getUserInfo()
-  //       .then(res => setCurrentUser(res))
-  //       .catch(err => console.log(`Ошибка: ${err}`))
-  //   }
+  //   history.push("/");
+  //   writeSavedMovies();
+  //   mainApi
+  //     .getUserInfo()
+  //     .then(res => {
+  //       setLoggedIn(true);
+  //       setCurrentUser(res);
+  //     })
+  //     .catch(err => {
+  //       console.log(`Ошибка: ${err}`);
+  //       setCurrentUser(null);
+  //       localStorage.clear();
+  //       setLoggedIn(false);
+  //     })
   // }, [loggedIn, history])
 
+  // history.push("/");
+  // writeSavedMovies();
+  // mainApi
+  //   .getUserInfo()
+  //   .then(res => {
+  //     setLoggedIn(true);
+  //     setCurrentUser(res);
+  //   })
+  //   .catch(err => {
+  //     console.log(`Ошибка: ${err}`);
+  //     setCurrentUser(null);
+  //     localStorage.clear();
+  //     setLoggedIn(false);
+  //   })
+
+  //     useEffect(() => {
+  //       if (localStorage.getItem('loggedIn', true)) {
+  //         setLoggedIn(true);
+  //       }
+  // }, [])
+
+  // const writeSavedMovies = () => {
+  //   mainApi
+  //     .getSavedMovies()
+  //     .then((res) => {
+  //       setSavedMovies(res.filter((movie) => movie.owner === currentUser?._id))
+  //     })
+  //     .catch((err) => console.log(`Ошибка: ${err.message}`));
+  // }
+
   useEffect(() => {
-    mainApi
-      .getUserInfo()
-      .then(res => {
-        setLoggedIn(true);
-        setCurrentUser(res);
-      })
-      .catch(err => {
-        setCurrentUser(null);
-        localStorage.clear();
-        setLoggedIn(false);
-      })
-  }, [])
+    if (loggedIn) {
+      mainApi
+        .getSavedMovies()
+        .then(res => {
+          localStorage.setItem('savedMovies', JSON.stringify(res));
+          setSavedMovies(res);
+        })
+        .catch(err => console.log(`${err}: ${err.message}`));
+    };
+  }, [loggedIn, currentUser]);
+
+
+  useEffect(() => {
+    if (localStorage.getItem('loggedIn', true)) {
+      setLoggedIn(true);
+    }
+    if (loggedIn) {
+      // writeSavedMovies();
+      mainApi
+        .getUserInfo()
+        .then(res => {
+          setLoggedIn(true);
+          setCurrentUser(res);
+        })
+        .catch(err => {
+          setCurrentUser(null);
+          localStorage.clear();
+          setLoggedIn(false);
+        });
+    }
+  }, [loggedIn])
 
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
-        <Header />
+        <Header
+          loggedIn={loggedIn}
+        />
         <Switch>
           <Route exact path="/">
             <Main />
           </Route>
           <ProtectedRoute
+            loggedIn={loggedIn}
             path="/movies"
             component={Movies}
             windowWidth={windowWidth}
@@ -134,6 +185,7 @@ function App() {
           />
 
           <ProtectedRoute
+            loggedIn={loggedIn}
             path="/saved-movies"
             component={SavedMovies}
             windowWidth={windowWidth}
@@ -144,6 +196,7 @@ function App() {
           />
 
           <ProtectedRoute
+            loggedIn={loggedIn}
             path="/profile"
             component={Profile}
             onLogout={onLogout}
@@ -155,7 +208,7 @@ function App() {
             {loggedIn ?
               <Redirect to="/movies" />
               :
-              <Register 
+              <Register
                 onRegister={onRegister}
                 errorMessage={errorMessage}
               />
@@ -164,21 +217,13 @@ function App() {
 
           <Route path="/signin">
             {loggedIn ?
-              <Redirect to="movies" />
+              <Redirect to="/movies" />
               :
               <Login
                 onLogin={onLogin}
                 errorMessage={errorMessage}
               />
             }
-          </Route>
-
-          <Route>
-            {loggedIn ? (
-              <Redirect to="/movies" />
-            ) : (
-              <Redirect to="/signin" />
-            )}
           </Route>
           <Route path="*">
             <NotFound />

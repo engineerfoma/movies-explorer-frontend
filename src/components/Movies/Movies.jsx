@@ -124,8 +124,8 @@ function Movies({
                     setFilteredMovies={setFilteredMovies}
                     filteredMovies={filteredMovies}
                     windowWidth={windowWidth}
-                    handleAddLikeMovie={handleSaveMovie}
-                    handleRemoveLikeMovie={handleRemoveMovie}
+                    handleAddMovie={handleSaveMovie}
+                    handleRemoveMovie={handleRemoveMovie}
                     savedMovies={savedMovies}
                 />
             }

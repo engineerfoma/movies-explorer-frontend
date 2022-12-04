@@ -24,7 +24,7 @@ function MoviesCard({
     const duration = getTimeFromMins(movie.duration);
 
     const handlerToggleSave = () => {
-        savedMovie ?
+        !savedMovie ?
             handleDeleteClick(savedMovie._id)
             :
             handleSaveMovie(movie);
