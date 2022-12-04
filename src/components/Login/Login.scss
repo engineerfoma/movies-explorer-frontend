@@ -1,8 +1,16 @@
 @import '../vars';
 
-.login {
-    &__error {
-        @include font(400, 10px, 1.2);
-        color: $red;
+.container {
+    position: relative;
+}
+
+.span {
+    @include font(400, 10px, 1.2);
+    color: $red;
+    position: absolute;
+    bottom: 2px;
+    
+    @media screen and (max-width: $breakpoint410) {
+        bottom: 0px;
     }
 }

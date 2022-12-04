@@ -52,9 +52,9 @@ function App() {
       .catch((err) => console.log(`Ошибка: ${err.message}`));
   }
 
-  const onLogin = ({ email, password }) => {
+  const onLogin = (data) => {
     return Auth
-      .authorize({ email, password })
+      .authorize(data)
       .then(() => {
         setLoggedIn(true);
         history.push('/movies');
@@ -89,16 +89,16 @@ function App() {
     return { name, email };
   }
 
-  useEffect(() => {
-    if (loggedIn) {
-      history.push("/");
-      writeSavedMovies();
-      mainApi
-        .getUserInfo()
-        .then(res => setCurrentUser(res))
-        .catch(err => console.log(`Ошибка: ${err}`))
-    }
-  }, [loggedIn, history])
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     history.push("/");
+  //     writeSavedMovies();
+  //     mainApi
+  //       .getUserInfo()
+  //       .then(res => setCurrentUser(res))
+  //       .catch(err => console.log(`Ошибка: ${err}`))
+  //   }
+  // }, [loggedIn, history])
 
   useEffect(() => {
     mainApi
@@ -112,7 +112,7 @@ function App() {
         localStorage.clear();
         setLoggedIn(false);
       })
-  })
+  }, [])
 
   return (
     <div className="page">

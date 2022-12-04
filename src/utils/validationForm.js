@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react'
 
 function useFormWithValidation() {
 
@@ -7,29 +7,28 @@ function useFormWithValidation() {
     const [isValid, setIsValid] = useState(false);
 
     const handleChange = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
+        const input = e.target;
+        const { name, value } = input;
 
         setValues({ ...values, [name]: value });
-        setErrors({ ...errors, [name]: e.target.validationMessage });
-
-        // if (name === "name") {
-        //     if (value.length < 2 || value.length > 30) {
-        //         setErrors({ ...errors, [name]: "Поле должно содержать не менее 2 и не более 30 символов" });
-        //     }
-        //     if (value.length === 0) {
-        //         setErrors({ ...errors, [name]: "Пожалуйста, заполните это поле" });
-        //     }
-        // }
-
-        // if (name === "email" || name === "password") {
-        //     if (value.length === 0) {
-        //         setErrors({ ...errors, [name]: "Пожалуйста, заполните это поле" });
-        //     }
-        // }
+        setErrors({ ...errors, [name]: input.validationMessage });
         
-
-        setIsValid(e.target.closest("form").checkValidity());
+        if (name === "name") {
+            if (value.length < 2 || value.length > 30) {
+                setErrors({ ...errors, [name]: "Поле должно содержать не менее 2 и не более 30 символов" });
+            }
+            if (value.length === 0) {
+                setErrors({ ...errors, [name]: "Пожалуйста, заполните это поле" });
+            }
+        }
+        
+        if (name === "email" || name === "password") {
+            if (value.length === 0) {
+                setErrors({ ...errors, [name]: "Пожалуйста, заполните это поле" });
+            }
+        }
+        
+        setIsValid(input.closest("form").checkValidity());
     }
 
     const resetForm = useCallback(
@@ -41,7 +40,16 @@ function useFormWithValidation() {
         [setValues, setErrors, setIsValid]
     );
 
-    return { values, errors, isValid, handleChange, resetForm, setValues, setIsValid, setErrors };
+    return {
+        values,
+        errors,
+        isValid,
+        handleChange,
+        resetForm,
+        setValues,
+        setIsValid,
+        setErrors
+    };
 }
 
 export default useFormWithValidation;

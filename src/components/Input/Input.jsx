@@ -18,7 +18,7 @@ function Input({
                 {placeholder}
             </label>
             <input
-                type={about === "name" ? `text` : `${about}`}
+                type={about === "name" ? "text" : `${about}`}
                 id={`input-${about}`}
                 name={about}
                 onChange={onChange}

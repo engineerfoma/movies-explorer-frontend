@@ -21,11 +21,11 @@ function Profile({ onUpdateUserData, onLogout }) {
         }
     }
 
-    useEffect(() => {
-        if (currentUser) {
-            resetForm(currentUser);
-        }
-    }, [resetForm, currentUser])
+    // useEffect(() => {
+    //     if (currentUser) {
+    //         resetForm(currentUser);
+    //     }
+    // }, [resetForm, currentUser])
 
     return (
         <main className="profile">

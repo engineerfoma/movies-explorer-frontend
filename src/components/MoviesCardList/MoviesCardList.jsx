@@ -48,11 +48,11 @@ function MoviesCard({
             })
         }
 
-        if (filteredMovies) {
-            const catalog = filteredMovies.filter((el, index) => numberOfFilms.quantityMovies > index);
-            setDisplayMovies(catalog);
-        };
-    }, [filteredMovies, numberOfFilms.quantityMovies, windowWidth]);
+        // if (filteredMovies) {
+        //     const catalog = filteredMovies.filter((el, index) => numberOfFilms.quantityMovies > index);
+        //     setDisplayMovies(catalog);
+        // };
+    }, [ numberOfFilms.quantityMovies, windowWidth]);
 
     return (
         <>
