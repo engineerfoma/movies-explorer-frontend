@@ -3,7 +3,8 @@ import SearchForm from '../SearchForm/SearchForm'
 import Preloader from '../Preloader/Preloader'
 import MoviesCardList from '../MoviesCardList/MoviesCardList'
 import { getMovies } from '../../utils/MoviesApi'
-import { errorMessageFormValidate } from '../../utils/constants'
+import { errorMessageFormValidate, errorNotFound, errorNotConnection } from '../../utils/constants'
+
 import './Movies.scss'
 
 function Movies({
@@ -17,6 +18,7 @@ function Movies({
     const [isLoading, setIsLoading] = useState(false);
     const [valueSearch, setValueSearch] = useState('');
     const [filteredMovies, setFilteredMovies] = useState([]);
+    const [pageMovies, setPageMovies] = useState([]);
     const [stateCheckbox, setStateCheckbox] = useState(false);
     const [isEmpty, setIsEmpty] = useState(false);
     const [isBadConnection, setIsBadConnection] = useState(false);
@@ -85,7 +87,7 @@ function Movies({
             setValueSearch(localStorage.getItem('valueSearch'));
         }
 
-        localStorage.getItem('stateCheckbox') === 'true' ? setStateCheckbox(true) : setStateCheckbox(false);
+        localStorage.getItem('stateCheckbox') === "true" ? setStateCheckbox(true) : setStateCheckbox(false);
     }, []);
 
     useEffect(() => {
@@ -104,29 +106,27 @@ function Movies({
                 errorMessage={errorMessage}
                 inputValue={valueSearch}
                 handleChange={handleChange}
-                saveFilm={false}
                 getMoviesList={getMoviesList}
                 checkFoundMovies={checkFoundMovies}
                 filteredMovies={filteredMovies}
             />
             {isLoading && <Preloader />}
             {isEmpty && !isBadConnection &&
-                <span className="movies__error movies__error_not-found">Ничего не найдено</span>
+                <span className="movies__error movies__error_not-found">{errorNotFound}</span>
             }
 
             {isBadConnection &&
-                <span className="movies__error movies__error_bad-connection">Во время запроса произошла ошибка.
-                    Возможно, проблема с соединением или сервер недоступен.
-                    Подождите немного и попробуйте ещё раз</span>
+                <span className="movies__error movies__error_bad-connection">{errorNotConnection}</span>
             }
             {!isEmpty && !isBadConnection &&
                 <MoviesCardList
                     setFilteredMovies={setFilteredMovies}
                     filteredMovies={filteredMovies}
                     windowWidth={windowWidth}
-                    handleAddMovie={handleSaveMovie}
+                    handleSaveMovie={handleSaveMovie}
                     handleRemoveMovie={handleRemoveMovie}
                     savedMovies={savedMovies}
+                    savePage={false}
                 />
             }
         </main>

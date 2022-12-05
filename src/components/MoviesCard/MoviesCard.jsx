@@ -2,6 +2,7 @@ import './MoviesCard.scss'
 import { useHistory } from 'react-router-dom';
 import { MOVIES_URL } from "../../utils/constants"
 import { useState, useEffect } from 'react'
+import Movies from '../MoreMovies/MoreMovies';
 
 function MoviesCard({
     movie,
@@ -12,9 +13,10 @@ function MoviesCard({
 }) {
 
     const history = useHistory();
-
+    // const savedMovie = savedMovies.find(m => m.nameEN === movie.nameEN);
     const [activeButton, setActiveButton] = useState(true);
-    const [savedMovie, setSavedMovie] = useState([]);
+    const [savedMovie, setSavedMovie] = useState({});
+
 
     const getTimeFromMins = (duration) => {
         let hours = Math.trunc(duration / 60);
@@ -24,22 +26,30 @@ function MoviesCard({
     const duration = getTimeFromMins(movie.duration);
 
     const handlerToggleSave = () => {
-        !savedMovie ?
-            handleDeleteClick(savedMovie._id)
-            :
+        if (!savedMovie) {
+            handleRemoveMovie(savedMovie._id);
+            setActiveButton(!activeButton);
+
+        } else {
             handleSaveMovie(movie);
-        setActiveButton(!activeButton);
+            setActiveButton(!activeButton);
+        }
     };
 
+    // const handleSaveClick = () => {
+    //     handleSaveMovie(movie);
+    // }
+
     const handleDeleteClick = () => {
-        handleRemoveMovie(movie)
+        handleRemoveMovie(movie._id);
     };
 
     // useEffect(() => {
-    //     if(!savePage) {
-    //         setSavedMovie(savedMovies.find(m => m.movieId === movie.id ))
-    //       }
-    //   },[savePage, savedMovies, movie.id])
+    //     if (savePage) {
+    //         console.log(savePage);
+    //         // setSavedMovie(savedMovies.find(m => m.movieId === movie.id))
+    //     }
+    // }, [savePage, savedMovies, movie.id]);
 
     return (
         <li className="list-element">
@@ -56,12 +66,22 @@ function MoviesCard({
 
                 )}
             </a>
-            {history.location.pathname === "/movies" && (
+            {!savePage && <button type="button" className={`list-element__button_default ${savedMovie && "list-element__button_saved"}`} onClick={handlerToggleSave}>Сохранить</button>}
+            {savePage && <button type="button" className="list-element__button_default list-element__button_remove" onClick={handleDeleteClick}></button>}
+            {/* {history.location.pathname === "/movies" && (
                 <button type="button" className={`list-element__button_default ${activeButton ? "list-element__button_saved" : ""}`} onClick={handlerToggleSave} />
             )}
             {history.location.pathname === "/saved-movies" && (
                 <button type="button" className="list-element__button_default list-element__button_remove" onClick={handleDeleteClick} />
-            )}
+            )} */}
+            {/* <button
+                type="button"
+                onClick={savedMovie || savePage ? handleDeleteClick : handleSaveClick}
+                className={`list-element__button_default 
+            ${(!savePage && savedMovie) ? "list-element__button_saved" : ""}
+            ${savePage ? "list-element__button_remove" : ""}
+            `}
+            ></button> */}
         </li>
     )
 }

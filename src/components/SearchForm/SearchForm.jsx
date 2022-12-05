@@ -3,7 +3,16 @@ import './SearchForm.scss'
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox'
 // import ValidationForm from '../../utils/validationForm'
 
-function SearchForm({ handlerToggleCheckbox, stateCheckbox, errorMessage, inputValue, handleChange, getMoviesList, filteredMovies, checkFoundMovies }) {
+function SearchForm({
+    handlerToggleCheckbox,
+    stateCheckbox,
+    errorMessage,
+    inputValue,
+    handleChange,
+    getMoviesList,
+    filteredMovies,
+    checkFoundMovies
+}) {
 
     // const { values, errors, handleChange } = ValidationForm();
 

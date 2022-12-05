@@ -25,22 +25,37 @@ function App() {
   const history = useHistory();
 
   const handleSaveMovie = (movie) => {
-    mainApi
+    return mainApi
       .addSavedMovie(movie)
       .then((res) => {
-        // writeSavedMovies();
-        setSavedMovies([...savedMovies, ...res])
+        uploadMovies();
+        setSavedMovies([...savedMovies, res])
       })
       .catch((err) => console.log(`Ошибка: ${err.message}`));
   }
 
   const handleRemoveMovie = (movieId) => {
-    mainApi
-      .removeSavedMovie(movieId)
-      .then(() => {
-        setSavedMovies((state => state.filter(a => a._id !== movieId)))
-      })
+    // const arr = savedMovies.filter(m => m.nameEN === movie.nameEN);
+    // arr.forEach(el => {
+      return mainApi
+        .removeSavedMovie(movieId)
+        .then((res) => {
+          const moviesList = savedMovies.filter(m => m._id !== movieId);
+          setSavedMovies(moviesList);
+        })
+    // })
       .catch((err) => console.log(`Ошибка: ${err.message}`));
+  }
+
+  function uploadMovies() {
+    mainApi
+    .getSavedMovies()
+      .then((res) => {
+        setSavedMovies(res.filter(m => m.owner === currentUser?._id))
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   const onLogin = (data) => {
@@ -148,6 +163,7 @@ function App() {
     }
     if (loggedIn) {
       // writeSavedMovies();
+      uploadMovies();
       mainApi
         .getUserInfo()
         .then(res => {
@@ -188,11 +204,12 @@ function App() {
             loggedIn={loggedIn}
             path="/saved-movies"
             component={SavedMovies}
-            windowWidth={windowWidth}
-            savedMovie={savedMovies}
+            setSavedMovies={setSavedMovies}
+            films={savedMovies}
             handleRemoveMovie={handleRemoveMovie}
-            errorMessage={errorMessage}
+            windowWidth={windowWidth}
             setErrorMessage={setErrorMessage}
+            errorMessage={errorMessage}
           />
 
           <ProtectedRoute
