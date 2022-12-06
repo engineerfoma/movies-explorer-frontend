@@ -1,7 +1,5 @@
-import { useEffect } from 'react'
 import './SearchForm.scss'
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox'
-// import ValidationForm from '../../utils/validationForm'
 
 function SearchForm({
     handlerToggleCheckbox,
@@ -10,20 +8,12 @@ function SearchForm({
     inputValue,
     handleChange,
     getMoviesList,
-    filteredMovies,
-    checkFoundMovies
 }) {
-
-    // const { values, errors, handleChange } = ValidationForm();
 
     const onSubmit = (e) => {
         e.preventDefault();
         getMoviesList(inputValue);
     }
-
-    // useEffect(() => {
-    //     checkFoundMovies(filteredMovies);
-    // }, [checkFoundMovies, filteredMovies])
 
     return (
         <section className="search">
@@ -40,7 +30,6 @@ function SearchForm({
                 <button
                     type="submit"
                     className="search__button"
-
                 />
                 {errorMessage && <span className="search__form_error search__form_error-search">{errorMessage}</span>}
             </form>

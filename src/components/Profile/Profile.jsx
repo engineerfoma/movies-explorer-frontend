@@ -4,7 +4,7 @@ import { CurrentUserContext } from '../../context/CurrentUserContext'
 import useFormWithValidation from '../../utils/validationForm'
 import { completeMessage } from '../../utils/constants'
 
-function Profile({ onUpdateUserData, onLogout, loading, stateMessage, isRegisterError }) {
+function Profile({ onUpdateUserData, onLogout, loading, stateMessage }) {
     const currentUser = useContext(CurrentUserContext);
     const {
         values,

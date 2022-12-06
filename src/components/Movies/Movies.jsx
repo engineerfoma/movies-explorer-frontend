@@ -18,8 +18,6 @@ function Movies({
     const [isLoading, setIsLoading] = useState(false);
     const [valueSearch, setValueSearch] = useState('');
     const [filteredMovies, setFilteredMovies] = useState([]);
-    const [pageMovies, setPageMovies] = useState([]);
-    const [activeButton, setActiveButton] = useState(true);
     const [stateCheckbox, setStateCheckbox] = useState(false);
     const [isEmpty, setIsEmpty] = useState(false);
     const [isBadConnection, setIsBadConnection] = useState(false);

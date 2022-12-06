@@ -1,7 +1,6 @@
 import './MoviesCard.scss'
 import { useHistory } from 'react-router-dom';
 import { MOVIES_URL } from "../../utils/constants"
-import { useState, useEffect } from 'react'
 
 function MoviesCard(props) {
 

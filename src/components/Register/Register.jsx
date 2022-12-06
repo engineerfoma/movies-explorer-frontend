@@ -4,7 +4,7 @@ import '../Input/Input.scss'
 import AuthSubmit from '../AuthSubmit/AuthSubmit'
 import useFormWithValidation from '../../utils/validationForm'
 
-function Register({ onRegister, isRegisterError }) {
+function Register({ onRegister }) {
     const {
         values,
         errors,
@@ -65,7 +65,7 @@ function Register({ onRegister, isRegisterError }) {
                 </div>
                 <div className="container container__password">
                     <label htmlFor="input-password" className="label label__password">
-                        E-mail
+                        Пароль
                     </label>
                     <input
                         type="password"

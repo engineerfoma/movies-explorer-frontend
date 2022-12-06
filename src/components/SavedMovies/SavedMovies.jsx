@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import './SavedMovies.scss'
 import SearchForm from '../SearchForm/SearchForm'
 import MoviesCardList from '../MoviesCardList/MoviesCardList'
-import { errorMessageFormValidate } from '../../utils/constants'
 
 function SavedMovies({
     errorMessage,
@@ -76,50 +75,6 @@ function SavedMovies({
             setSearchError(false)
         }
     }
-
-
-
-    // const [filteredMovies, setFilteredMovies] = useState(savedMovies);
-    // const [inputQuery, setInputQuery] = useState('');
-    // const [stateCheckbox, setStateCheckbox] = useState(false);
-
-    // // const checkFoundMovies = (filteredMovies) => filteredMovies.length === 0 ? setIsEmpty(true) : setIsEmpty(false);
-
-    // const handlerFilteredMovies = (movies, value, checked) => {
-    //     const filterMovies = movies.filter(
-    //         movie => {
-    //             return movie.nameRU.toLowerCase().includes(value.toLowerCase()) ||
-    //                 movie.nameEN.toLowerCase().includes(value.toLowerCase())
-    //         }
-    //     );
-    //     setFilteredMovies(
-    //         checked ?
-    //             filterMovies.filter(movie => movie.duration <= 40)
-    //             :
-    //             filterMovies
-    //     );
-    //     // checkFoundMovies(filterMovies);
-    // };
-
-    // const handleChange = (e) => setInputQuery(e.target.value);
-
-    // const handleSearchSubmit = (input) => {
-    //     if (input) {
-    //         setErrorMessage(null);
-    //         setInputQuery(input);
-    //         handlerFilteredMovies(savedMovies, inputQuery, stateCheckbox);
-    //     } else {
-    //         setErrorMessage(errorMessageFormValidate)
-    //     }
-    // };
-
-    // const handlerToggleCheckbox = () => {
-    //     setStateCheckbox(!stateCheckbox);
-    // }
-
-    // useEffect(() => {
-    //     handlerFilteredMovies(savedMovies, inputQuery, stateCheckbox);
-    // }, [savedMovies, inputQuery, stateCheckbox]);
 
     return (
         <main>

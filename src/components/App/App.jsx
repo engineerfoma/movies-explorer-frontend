@@ -21,7 +21,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [savedMovies, setSavedMovies] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
-  const [isRegisterError, setIsRegisterError] = useState(false);
   const [loading, setLoading] = useState(false);
   const windowWidth = useWindowSize().width;
   const history = useHistory();
@@ -86,59 +85,19 @@ function App() {
       .catch((err) => console.log(`Ошибка: ${err.message}`))
   }
 
-
-  // setLoading(true);
-  // setStateMessage(true);
-  // Promise.all([mainApi.setUserInfo(userData), mainApi.getUserInfo()])
-  //   .then(([data, res]) => {
-  //     setCurrentUser(data);
-  //     setCurrentUser(res);
-  //   })
-  //   .catch(err => console.log(`Ошибка: ${err.message}`))
-  //   .finally(() => {
-  //     setLoading(false);
-  //     setStateMessage(false);
-  //   })
-
-
-  const onRegister = (data, userData) => {
-    Promise.all([Auth.register(data), Auth.authorize(userData)])
+  const onRegister = (data) => {
+    Auth
+    .register(data)
     .then(() => {
-      setLoggedIn(true);
-      history.push('/movies');
-      localStorage.setItem('loggedIn', true);
+      onLogin(data);
     })
     .catch(err => {
       if (err === "Такой email уже существует") {
-        setIsRegisterError(true);
         console.log(`Ошибка: ${err.message}`)
       }
       console.log(`Ошибка: ${err.message}`)
     })
   }
-  //   Auth
-  //     .register(data)
-  //     .then(() => {
-  //       setLoggedIn(true);
-  //       history.push('/movies');
-  //       localStorage.setItem('loggedIn', true);
-  //     })
-  //     .catch((err) => {
-  //       if (err === "Такой email уже существует") {
-  //         setIsRegisterError(true);
-  //       }
-  //       console.log(`Ошибка: ${err.message}`)
-  //     });
-  //   Auth
-  //     .authorize(data)
-  //     .then(() => {
-  //       setLoggedIn(true);
-  //       history.push('/movies');
-  //       localStorage.setItem('loggedIn', true);
-  //     })
-  //     .catch((err) => console.log(`Ошибка: ${err.message}`))
-
-  // }
 
   const onLogout = () => {
     return Auth
@@ -236,7 +195,6 @@ function App() {
             onUpdateUserData={updateUserData}
             loading={loading}
             stateMessage={stateMessage}
-            isRegisterError={isRegisterError}
           />
           <Route path="/signup">
             {loggedIn ?
@@ -244,7 +202,6 @@ function App() {
               :
               <Register
                 onRegister={onRegister}
-                isRegisterError={isRegisterError}
               />
             }
           </Route>
