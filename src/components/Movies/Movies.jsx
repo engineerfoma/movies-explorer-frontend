@@ -13,12 +13,15 @@ function Movies({
     handleSaveMovie,
     handleRemoveMovie,
     errorMessage,
-    setErrorMessage
+    setErrorMessage,
+    handleCardLike,
+    currentUser
 }) {
     const [isLoading, setIsLoading] = useState(false);
     const [valueSearch, setValueSearch] = useState('');
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [pageMovies, setPageMovies] = useState([]);
+    const [activeButton, setActiveButton] = useState(true);
     const [stateCheckbox, setStateCheckbox] = useState(false);
     const [isEmpty, setIsEmpty] = useState(false);
     const [isBadConnection, setIsBadConnection] = useState(false);
@@ -126,7 +129,9 @@ function Movies({
                     handleSaveMovie={handleSaveMovie}
                     handleRemoveMovie={handleRemoveMovie}
                     savedMovies={savedMovies}
-                    savePage={false}
+                    // setActiveButton={setActiveButton}
+                    // activeButton={activeButton}
+                    // handleCardLike={handleCardLike}
                 />
             }
         </main>

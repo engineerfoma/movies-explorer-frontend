@@ -3,7 +3,7 @@ import { MOVIES_URL, LOCAL_API } from "./constants";
 class Api {
     constructor(url) {
         this._url = url;
-        this.headers = {
+        this._headers = {
             'Content-Type': 'application/json'
         }
     }
@@ -24,12 +24,14 @@ class Api {
             .then(this._checkResponse);
     }
 
-    setUserInfo({ name, email }) {
+    setUserInfo(data) {
         return fetch(`${this._url}/users/me`, {
             credentials: 'include',
             method: 'PATCH',
-            headers: this._headers,
-            body: JSON.stringify({ name, email })
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
         })
             .then(this._checkResponse);
     }
@@ -50,7 +52,7 @@ class Api {
         }
         return fetch(`${this._url}/movies`, {
             method: 'POST',
-            headers: this.headers,
+            headers: this._headers,
             credentials: 'include',
             body: JSON.stringify(body)
         })
@@ -60,7 +62,7 @@ class Api {
     removeSavedMovie(id) {
         return fetch(`${this._url}/movies/${id}`, {
             method: 'DELETE',
-            headers: this.headers,
+            headers: this._headers,
             credentials: 'include'
         })
             .then(this._checkResponse);
@@ -69,7 +71,7 @@ class Api {
     getSavedMovies() {
         return fetch(`${this._url}/movies`, {
             method: 'GET',
-            headers: this.headers,
+            headers: this._headers,
             credentials: 'include'
         })
             .then(this._checkResponse);

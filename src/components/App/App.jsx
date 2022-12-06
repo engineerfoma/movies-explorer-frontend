@@ -21,35 +21,49 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [savedMovies, setSavedMovies] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isOpenPopup, setIsOpenPopup] = useState(false);
   const windowWidth = useWindowSize().width;
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
 
   const handleSaveMovie = (movie) => {
     return mainApi
       .addSavedMovie(movie)
       .then((res) => {
-        uploadMovies();
+        writeSavedMovies();
         setSavedMovies([...savedMovies, res])
       })
       .catch((err) => console.log(`Ошибка: ${err.message}`));
   }
 
+  const getMovieIdOnSavedMovies = (id, arr) => {
+    return arr.find((item) => item.movieId === id)._id;
+  }
+
   const handleRemoveMovie = (movieId) => {
-    // const arr = savedMovies.filter(m => m.nameEN === movie.nameEN);
-    // arr.forEach(el => {
-      return mainApi
-        .removeSavedMovie(movieId)
-        .then((res) => {
-          const moviesList = savedMovies.filter(m => m._id !== movieId);
-          setSavedMovies(moviesList);
-        })
-    // })
+    const id = getMovieIdOnSavedMovies(movieId, savedMovies);
+    return mainApi
+      .removeSavedMovie(id)
+      .then(() => {
+        const moviesList = savedMovies.filter(m => m._id !== id);
+        setSavedMovies(moviesList);
+      })
       .catch((err) => console.log(`Ошибка: ${err.message}`));
   }
 
-  function uploadMovies() {
+  const handleRemoveSaveMovie = (movieId) => {
+    return mainApi
+      .removeSavedMovie(movieId)
+      .then(() => {
+        const moviesList = savedMovies.filter(m => m._id !== movieId);
+        setSavedMovies(moviesList);
+      })
+      .catch((err) => console.log(`Ошибка: ${err.message}`));
+  }
+
+  function writeSavedMovies() {
     mainApi
-    .getSavedMovies()
+      .getSavedMovies()
       .then((res) => {
         setSavedMovies(res.filter(m => m.owner === currentUser?._id))
       })
@@ -87,74 +101,75 @@ function App() {
       .then(() => {
         setLoggedIn(false);
         history.push("/signin");
-        localStorage.clear();
+        // localStorage.clear();
       })
       .catch(err => console.log(`Ошибка: ${err.message}`));
   }
 
-  const updateUserData = ({ name, email }) => {
-    return { name, email };
-  }
+  const updateUserData = (userData) => {
+    setLoading(true);
+    Promise.all([mainApi.setUserInfo(userData), mainApi.getUserInfo()])
+      .then(([data, res]) => {
+        setCurrentUser(data);
+        setCurrentUser(res);
+      })
+      .catch(err => console.log(`Ошибка: ${err}`))
+      .finally(() => {
+        setLoading(false);
+      })
+  };
 
-
-  // useEffect(() => {
-  //   history.push("/");
-  //   writeSavedMovies();
+  // const updateUserData = (userData) => {
+  //   setLoading(true);
   //   mainApi
-  //     .getUserInfo()
-  //     .then(res => {
-  //       setLoggedIn(true);
-  //       setCurrentUser(res);
+  //     .setUserInfo(userData)
+  //     .then((data) => {
+  //       setCurrentUser(data);
   //     })
   //     .catch(err => {
-  //       console.log(`Ошибка: ${err}`);
-  //       setCurrentUser(null);
-  //       localStorage.clear();
-  //       setLoggedIn(false);
+  //       console.log(`Ошибка: ${err.message}`);
   //     })
-  // }, [loggedIn, history])
-
-  // history.push("/");
-  // writeSavedMovies();
-  // mainApi
-  //   .getUserInfo()
-  //   .then(res => {
-  //     setLoggedIn(true);
-  //     setCurrentUser(res);
-  //   })
-  //   .catch(err => {
-  //     console.log(`Ошибка: ${err}`);
-  //     setCurrentUser(null);
-  //     localStorage.clear();
-  //     setLoggedIn(false);
-  //   })
-
-  //     useEffect(() => {
-  //       if (localStorage.getItem('loggedIn', true)) {
-  //         setLoggedIn(true);
-  //       }
-  // }, [])
-
-  // const writeSavedMovies = () => {
+  //     .finally(() => {
+  //       setLoading(false);
+  //     });
   //   mainApi
-  //     .getSavedMovies()
-  //     .then((res) => {
-  //       setSavedMovies(res.filter((movie) => movie.owner === currentUser?._id))
+  //     .getUserInfo()
+  //     .then((data) => {
+  //       setCurrentUser(data)
   //     })
-  //     .catch((err) => console.log(`Ошибка: ${err.message}`));
+  //     .catch(err => {
+  //       console.log(`Ошибка: ${err.message}`);
+  //     })
+  //     .finally(() => {
+  //       setLoading(false);
+  //     });
   // }
 
-  useEffect(() => {
-    if (loggedIn) {
-      mainApi
-        .getSavedMovies()
-        .then(res => {
-          localStorage.setItem('savedMovies', JSON.stringify(res));
-          setSavedMovies(res);
-        })
-        .catch(err => console.log(`${err}: ${err.message}`));
-    };
-  }, [loggedIn, currentUser]);
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     writeSavedMovies();
+  //   };
+  // }, [loggedIn]);
+  // useEffect(() => {
+
+  //   mainApi
+  //     .getUserInfo()
+  //     .then((data) => {
+  //       console.log(data);
+  //       setLoading(true);
+  //       setCurrentUser(data);
+  //       setLoggedIn(true);
+  //     })
+  //     .catch(err => {
+  //       console.log(`Ошибка: ${err.message}`);
+  //     })
+  //     .finally(() => {
+  //       setLoading(false);
+  //       console.log('final');
+  //     });
+
+  // }, []);
+
 
 
   useEffect(() => {
@@ -162,8 +177,7 @@ function App() {
       setLoggedIn(true);
     }
     if (loggedIn) {
-      // writeSavedMovies();
-      uploadMovies();
+      writeSavedMovies();
       mainApi
         .getUserInfo()
         .then(res => {
@@ -171,12 +185,16 @@ function App() {
           setCurrentUser(res);
         })
         .catch(err => {
-          setCurrentUser(null);
-          localStorage.clear();
           setLoggedIn(false);
+          localStorage.clear();
         });
+      mainApi
+        .getSavedMovies()
+        .then((res) => {
+          setSavedMovies(res);
+        })
     }
-  }, [loggedIn])
+  }, [loggedIn]);
 
   return (
     <div className="page">
@@ -193,7 +211,7 @@ function App() {
             path="/movies"
             component={Movies}
             windowWidth={windowWidth}
-            savedMovie={savedMovies}
+            savedMovies={savedMovies}
             handleSaveMovie={handleSaveMovie}
             handleRemoveMovie={handleRemoveMovie}
             errorMessage={errorMessage}
@@ -206,7 +224,8 @@ function App() {
             component={SavedMovies}
             setSavedMovies={setSavedMovies}
             films={savedMovies}
-            handleRemoveMovie={handleRemoveMovie}
+            savedMovies={savedMovies}
+            handleRemoveMovie={handleRemoveSaveMovie}
             windowWidth={windowWidth}
             setErrorMessage={setErrorMessage}
             errorMessage={errorMessage}
@@ -220,6 +239,7 @@ function App() {
             onUpdateUserData={updateUserData}
             errorMessage={errorMessage}
             setErrorMessage={setErrorMessage}
+            loading={loading}
           />
           <Route path="/signup">
             {loggedIn ?

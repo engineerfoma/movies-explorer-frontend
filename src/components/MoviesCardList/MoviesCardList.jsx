@@ -10,13 +10,9 @@ function MoviesCard({
     handleSaveMovie,
     handleRemoveMovie,
     savedMovies,
-    setSavedMovies,
-    savePage
 }) {
-
     const history = useHistory();
     const [displayMovies, setDisplayMovies] = useState(filteredMovies);
-    
     const [numberOfFilms, setNumberOfFilms] = useState({
         quantityMovies: 12,
         moreMovies: 3,
@@ -28,7 +24,7 @@ function MoviesCard({
                 displayMovies.length,
                 displayMovies.length + numberOfFilms.moreMovies,
             );
-            setDisplayMovies([ displayMovies, ...MoreMovies ]);
+            setDisplayMovies([...displayMovies, ...MoreMovies]);
         };
     };
 
@@ -49,8 +45,7 @@ function MoviesCard({
                 moreMovies: 2
             })
         }
-
-    }, [numberOfFilms.quantityMovies, windowWidth]);
+    }, [windowWidth, setNumberOfFilms.quantityMovies]);
 
     useEffect(() => {
         if (filteredMovies) {
@@ -58,41 +53,24 @@ function MoviesCard({
                 (el, index) => numberOfFilms.quantityMovies > index);
             setDisplayMovies(catalog);
         };
-    }, [filteredMovies, numberOfFilms.quantityMovies, savedMovies]);
+    }, [filteredMovies, numberOfFilms.quantityMovies]);
 
     return (
         <>
             <section className="gallery">
                 <ul className="gallery__list">
-                    {/* {history.location.pathname === "/movies" && ( */}
-                       {
-                        filteredMovies.map((item) => {
+                    {
+                        displayMovies.map((item) => {
                             return (
                                 <Movie
                                     movie={item}
-                                    key={savePage ? item._id : item.id}
+                                    key={item._id || item.id}
                                     handleSaveMovie={handleSaveMovie}
                                     handleRemoveMovie={handleRemoveMovie}
                                     savedMovies={savedMovies}
-                                    savePage={savePage}
                                 />)
                         })
                     }
-                    {/* ) */}
-                    {/* } */}
-                    {/* {history.location.pathname === "/saved-movies" && (
-                        filteredMovies.map((item) => {
-                            return (
-                                <Movie
-                                    movie={item}
-                                    key={item.id}
-                                    handleRemoveMovie={handleRemoveMovie}
-                                    savedMovies={savedMovies}
-                                    savePage={true}
-                                />)
-                        })
-
-                    )} */}
                 </ul>
             </section>
             {history.location.pathname === "/movies" && (

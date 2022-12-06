@@ -104,6 +104,11 @@
         }
 
         &_saved {
+            transition: all .3s;
+            width: 100px;
+            height: 29px;
+            border-radius: 30px;
+            border: none;
             background-color: $bck-button_grey;
             background-image: url('../../images/save.svg');
             background-repeat: no-repeat;
@@ -115,6 +120,10 @@
         }
 
         &_remove {
+            transition: all .3s;
+            width: 100px;
+            height: 29px;
+            border: none;
             background-color: $bck-button_grey;
             border-radius: 30px;
             background-image: url('../../images/x.svg');

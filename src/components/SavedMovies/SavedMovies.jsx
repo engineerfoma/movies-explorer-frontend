@@ -22,7 +22,7 @@ function SavedMovies({
     const [queryActive, setQueryActive] = useState(false);
     const [searchError, setSearchError] = useState(false);
     const [inputValue, setInputValue] = useState("");
-    const savedMoviesPage = true;
+    const savePage = true;
 
     useEffect(() => {
         setQueryMovies(films);
@@ -52,8 +52,7 @@ function SavedMovies({
         setInputValue(e.target.value);
     }
 
-    function handleShowSavedFilms(e) {
-        e.preventDefault();
+    function handleShowSavedFilms() {
         if (inputValue) {
             handleSavedShowFilms(inputValue)
             setSearchActive(false)
@@ -153,8 +152,8 @@ function SavedMovies({
                     filteredMovies={queryMovies}
                     handleRemoveMovie={handleRemoveMovie}
                     setPageMovies={setSavedMovies}
-                    savedMoviesPage={savedMoviesPage}
-                    savePage={true}
+                    savePage={savePage}
+                    savedMovies={savedMovies}
                 />}
         </main>
     )

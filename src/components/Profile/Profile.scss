@@ -25,6 +25,15 @@
         }
     }
 
+    &__input {
+        width: 70%;
+        text-align: right;
+        background-color: $bck-color;
+        color: $white-color;
+        border: none;
+        outline: none;
+    }
+
     &__title {
         @include font(500, 24px, 1.21);
         margin: 0 0 123px;
