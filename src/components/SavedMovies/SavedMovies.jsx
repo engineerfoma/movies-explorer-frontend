@@ -6,8 +6,6 @@ import { errorMessageFormValidate } from '../../utils/constants'
 
 function SavedMovies({
     errorMessage,
-    setErrorMessage,
-    windowWidth,
     savedMovies,
     setSavedMovies,
     handleRemoveMovie,
@@ -126,12 +124,6 @@ function SavedMovies({
     return (
         <main>
             <SearchForm
-                // getMoviesList={handleSearchSubmit}
-                // handlerToggleCheckbox={handlerToggleCheckbox}
-                // stateCheckbox={stateCheckbox}
-                // inputValue={inputQuery}
-                // errorMessage={errorMessage}
-                // handleChange={handleChange}
                 stateCheckbox={checkboxValue}
                 handlerToggleCheckbox={handlerToggleCheckbox}
                 inputValue={inputValue}
@@ -139,14 +131,6 @@ function SavedMovies({
                 getMoviesList={handleShowSavedFilms}
                 errorMessage={errorMessage}
             />
-            {/* <MoviesCardList
-                movie = {filteredMovies}
-                handleRemoveMovie={handleRemoveMovie}
-                setPageMovies={setSavedMovies}
-                windowWidth={windowWidth}
-                errorMessage={errorMessage}
-                savePage={true}
-            /> */}
             {films.length !== 0 &&
                 <MoviesCardList
                     filteredMovies={queryMovies}

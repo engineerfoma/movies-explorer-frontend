@@ -40,6 +40,14 @@
             cursor: pointer;
             opacity: .8;
         }
+
+        &-disabled {
+            opacity: .8;
+            &:hover {
+                cursor: default;
+                opacity: .8;
+            }
+        }
     }
 
     &_label {

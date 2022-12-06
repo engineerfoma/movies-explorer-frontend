@@ -1,15 +1,10 @@
 import './Login.scss'
 import AuthSubmit from '../AuthSubmit/AuthSubmit'
-import Input from '../Input/Input'
 import useFormWithValidation from '../../utils/validationForm'
 
-function Login({
-    onLogin,
-    errorMessage,
-    setErrorMessage
-}) {
+function Login({ onLogin }) {
 
-    const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation();
+    const { values, errors, isValid, handleChange } = useFormWithValidation();
 
     const handlerSubmitForm = (e) => {
         e.preventDefault();
@@ -18,15 +13,7 @@ function Login({
 
     return (
         <main className="login">
-            <form className="form login__form" onSubmit={handlerSubmitForm}>
-                {/* <Input
-                    about="email"
-                    placeholder="E-mail"
-                    onChange={handleChange}
-                    values={values}
-                    pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
-                />
-                <span className="span login__error">{errors.email}</span> */}
+            <form className="form login__form" onSubmit={handlerSubmitForm} noValidate>
                 <div className="container container__email">
                     <label htmlFor="input-email" className="label label__email">
                         E-mail
@@ -44,13 +31,6 @@ function Login({
                     />
                     <span className="span register__error">{errors.email}</span>
                 </div>
-                {/* <Input
-                    about="password"
-                    placeholder="Пароль"
-                    onChange={handleChange}
-                    values={values}
-                />
-                <span className="span login__error">{errors.password}</span> */}
                 <div className="container container__password">
                     <label htmlFor="input-password" className="label label__password">
                         Пароль
@@ -67,13 +47,13 @@ function Login({
                     />
                     <span className="span register__error">{errors.password}</span>
                 </div>
-
                 <AuthSubmit
                     page="login"
                     textButton="Войти"
                     label="Ещё не зарегистрированы?"
                     link="/signup"
                     linkText="Регистрация"
+                    isValid={isValid}
                 />
             </form>
         </main>

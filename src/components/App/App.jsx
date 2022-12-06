@@ -21,10 +21,13 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [savedMovies, setSavedMovies] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
-  const [isOpenPopup, setIsOpenPopup] = useState(false);
-  const windowWidth = useWindowSize().width;
+  const [isRegisterError, setIsRegisterError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const windowWidth = useWindowSize().width;
   const history = useHistory();
+
+
+  const [stateMessage, setStateMessage] = useState(false);
 
   const handleSaveMovie = (movie) => {
     return mainApi
@@ -33,7 +36,7 @@ function App() {
         writeSavedMovies();
         setSavedMovies([...savedMovies, res])
       })
-      .catch((err) => console.log(`Ошибка: ${err.message}`));
+      .catch((err) => console.log(`Ошибка: ${err.message}`))
   }
 
   const getMovieIdOnSavedMovies = (id, arr) => {
@@ -48,7 +51,7 @@ function App() {
         const moviesList = savedMovies.filter(m => m._id !== id);
         setSavedMovies(moviesList);
       })
-      .catch((err) => console.log(`Ошибка: ${err.message}`));
+      .catch((err) => console.log(`Ошибка: ${err.message}`))
   }
 
   const handleRemoveSaveMovie = (movieId) => {
@@ -58,7 +61,7 @@ function App() {
         const moviesList = savedMovies.filter(m => m._id !== movieId);
         setSavedMovies(moviesList);
       })
-      .catch((err) => console.log(`Ошибка: ${err.message}`));
+      .catch((err) => console.log(`Ошибка: ${err.message}`))
   }
 
   function writeSavedMovies() {
@@ -83,17 +86,59 @@ function App() {
       .catch((err) => console.log(`Ошибка: ${err.message}`))
   }
 
-  const onRegister = (data) => {
-    return Auth
-      .register(data)
-      .then(() => {
-        setLoggedIn(true);
-        history.push('/movies');
-      })
-      .catch(err => {
-        return `${err}: ${err.message}`;
-      })
+
+  // setLoading(true);
+  // setStateMessage(true);
+  // Promise.all([mainApi.setUserInfo(userData), mainApi.getUserInfo()])
+  //   .then(([data, res]) => {
+  //     setCurrentUser(data);
+  //     setCurrentUser(res);
+  //   })
+  //   .catch(err => console.log(`Ошибка: ${err.message}`))
+  //   .finally(() => {
+  //     setLoading(false);
+  //     setStateMessage(false);
+  //   })
+
+
+  const onRegister = (data, userData) => {
+    Promise.all([Auth.register(data), Auth.authorize(userData)])
+    .then(() => {
+      setLoggedIn(true);
+      history.push('/movies');
+      localStorage.setItem('loggedIn', true);
+    })
+    .catch(err => {
+      if (err === "Такой email уже существует") {
+        setIsRegisterError(true);
+        console.log(`Ошибка: ${err.message}`)
+      }
+      console.log(`Ошибка: ${err.message}`)
+    })
   }
+  //   Auth
+  //     .register(data)
+  //     .then(() => {
+  //       setLoggedIn(true);
+  //       history.push('/movies');
+  //       localStorage.setItem('loggedIn', true);
+  //     })
+  //     .catch((err) => {
+  //       if (err === "Такой email уже существует") {
+  //         setIsRegisterError(true);
+  //       }
+  //       console.log(`Ошибка: ${err.message}`)
+  //     });
+  //   Auth
+  //     .authorize(data)
+  //     .then(() => {
+  //       setLoggedIn(true);
+  //       history.push('/movies');
+  //       localStorage.setItem('loggedIn', true);
+  //     })
+  //     .catch((err) => console.log(`Ошибка: ${err.message}`))
+
+  // }
 
   const onLogout = () => {
     return Auth
@@ -101,76 +146,31 @@ function App() {
       .then(() => {
         setLoggedIn(false);
         history.push("/signin");
-        // localStorage.clear();
       })
       .catch(err => console.log(`Ошибка: ${err.message}`));
   }
 
   const updateUserData = (userData) => {
     setLoading(true);
+    setStateMessage(true);
     Promise.all([mainApi.setUserInfo(userData), mainApi.getUserInfo()])
       .then(([data, res]) => {
         setCurrentUser(data);
         setCurrentUser(res);
       })
-      .catch(err => console.log(`Ошибка: ${err}`))
+      .catch(err => {
+        setStateMessage(false);
+        console.log(`Ошибка: ${err.message}`)
+      })
       .finally(() => {
         setLoading(false);
+        setStateMessage(false);
       })
   };
 
-  // const updateUserData = (userData) => {
-  //   setLoading(true);
-  //   mainApi
-  //     .setUserInfo(userData)
-  //     .then((data) => {
-  //       setCurrentUser(data);
-  //     })
-  //     .catch(err => {
-  //       console.log(`Ошибка: ${err.message}`);
-  //     })
-  //     .finally(() => {
-  //       setLoading(false);
-  //     });
-  //   mainApi
-  //     .getUserInfo()
-  //     .then((data) => {
-  //       setCurrentUser(data)
-  //     })
-  //     .catch(err => {
-  //       console.log(`Ошибка: ${err.message}`);
-  //     })
-  //     .finally(() => {
-  //       setLoading(false);
-  //     });
-  // }
-
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     writeSavedMovies();
-  //   };
-  // }, [loggedIn]);
-  // useEffect(() => {
-
-  //   mainApi
-  //     .getUserInfo()
-  //     .then((data) => {
-  //       console.log(data);
-  //       setLoading(true);
-  //       setCurrentUser(data);
-  //       setLoggedIn(true);
-  //     })
-  //     .catch(err => {
-  //       console.log(`Ошибка: ${err.message}`);
-  //     })
-  //     .finally(() => {
-  //       setLoading(false);
-  //       console.log('final');
-  //     });
-
-  // }, []);
-
-
+  useEffect(() => {
+    setStateMessage(true);
+  }, [])
 
   useEffect(() => {
     if (localStorage.getItem('loggedIn', true)) {
@@ -193,6 +193,7 @@ function App() {
         .then((res) => {
           setSavedMovies(res);
         })
+        .catch(err => console.log(`Ошибка: ${err.message}`))
     }
   }, [loggedIn]);
 
@@ -217,7 +218,6 @@ function App() {
             errorMessage={errorMessage}
             setErrorMessage={setErrorMessage}
           />
-
           <ProtectedRoute
             loggedIn={loggedIn}
             path="/saved-movies"
@@ -226,20 +226,17 @@ function App() {
             films={savedMovies}
             savedMovies={savedMovies}
             handleRemoveMovie={handleRemoveSaveMovie}
-            windowWidth={windowWidth}
-            setErrorMessage={setErrorMessage}
             errorMessage={errorMessage}
           />
-
           <ProtectedRoute
             loggedIn={loggedIn}
             path="/profile"
             component={Profile}
             onLogout={onLogout}
             onUpdateUserData={updateUserData}
-            errorMessage={errorMessage}
-            setErrorMessage={setErrorMessage}
             loading={loading}
+            stateMessage={stateMessage}
+            isRegisterError={isRegisterError}
           />
           <Route path="/signup">
             {loggedIn ?
@@ -247,7 +244,7 @@ function App() {
               :
               <Register
                 onRegister={onRegister}
-                errorMessage={errorMessage}
+                isRegisterError={isRegisterError}
               />
             }
           </Route>

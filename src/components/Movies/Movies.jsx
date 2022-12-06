@@ -13,9 +13,7 @@ function Movies({
     handleSaveMovie,
     handleRemoveMovie,
     errorMessage,
-    setErrorMessage,
-    handleCardLike,
-    currentUser
+    setErrorMessage
 }) {
     const [isLoading, setIsLoading] = useState(false);
     const [valueSearch, setValueSearch] = useState('');
@@ -129,9 +127,6 @@ function Movies({
                     handleSaveMovie={handleSaveMovie}
                     handleRemoveMovie={handleRemoveMovie}
                     savedMovies={savedMovies}
-                    // setActiveButton={setActiveButton}
-                    // activeButton={activeButton}
-                    // handleCardLike={handleCardLike}
                 />
             }
         </main>

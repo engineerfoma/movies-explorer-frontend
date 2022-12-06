@@ -4,5 +4,5 @@ export const LOCAL_API = 'http://localhost:3001';
 export const errorMessageFormValidate = 'Нужно ввести ключевое слово';
 export const errorNotConnection = 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз';
 export const errorNotFound = 'Ничего не найдено';
-export const repeatMessage = 'Данные совпадают с предыдущими';
-export const completeMessage = 'Данные успешно обновлены';
+export const repeatMessage = 'Ошибка!';
+export const completeMessage = 'Профиль успешно изменён!';

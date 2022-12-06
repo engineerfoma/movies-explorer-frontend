@@ -1,24 +1,18 @@
 import './Profile.scss'
-import { useContext, useState, useEffect } from 'react'
+import { useContext } from 'react'
 import { CurrentUserContext } from '../../context/CurrentUserContext'
 import useFormWithValidation from '../../utils/validationForm'
-import { repeatMessage, completeMessage } from '../../utils/constants'
+import { completeMessage } from '../../utils/constants'
 
-function Profile({ onUpdateUserData, onLogout, stateErr, loading }) {
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const [isMessage, setIsMessage] = useState('');
-    const [stateError, setStateEror] = useState(stateErr);
+function Profile({ onUpdateUserData, onLogout, loading, stateMessage, isRegisterError }) {
     const currentUser = useContext(CurrentUserContext);
     const {
         values,
-        setValues,
         errors,
         isValid,
         handleChange
     } = useFormWithValidation();
-    // (
-    //     `${isLiked ? 'list-element__like list-element__like_active' : 'list-element__like'}`
-    // );
+
     const text = (`${loading ?
         'Редактирование...'
         :
@@ -26,39 +20,14 @@ function Profile({ onUpdateUserData, onLogout, stateErr, loading }) {
 
     const handlerSubmitForm = (e) => {
         e.preventDefault();
-        onUpdateUserData(values);
-
-        if (currentUser?.name === values.name && currentUser?.email === values.email) {
-            // setIsPopupOpen(true);
-            // setStateEror(true);
-            // setIsMessage(repeatMessage);
-        } else {
-            // setIsPopupOpen(true);
-            // setStateEror(false);
-            // setIsMessage(completeMessage);
-        }
-
         if (!values.name) {
             values.name = currentUser?.name;
         }
-
         if (!values.email) {
             values.email = currentUser?.email;
         }
+        onUpdateUserData(values);
     }
-
-    // const click = (e) => handlerSubmitForm(e);
-
-    // useEffect(() => {
-    //     onUpdateUserData(values);
-    // }, [click])
-
-    // useEffect(() => {
-    //     setValues({
-    //         name: currentUser?.name,
-    //         email: currentUser?.email,
-    //     });
-    // }, [setValues, currentUser]);
 
     return (
         <main className="profile">
@@ -104,14 +73,15 @@ function Profile({ onUpdateUserData, onLogout, stateErr, loading }) {
                         />
                         <span className="span login__error">{errors.name}</span>
                     </div>
-                    {isPopupOpen && stateError && (<span className="message message_error">{isMessage}</span>)}
-                    {isPopupOpen && !stateError && (<span className="message">{isMessage}</span>)}
+                    {!stateMessage && (<span className="message message_error">{completeMessage}</span>)}
                     <div className="profile__edit">
                         <button
                             type="submit"
-                            className={`profile__button profile__button_edit `}
-                        // disabled={isValid ? "disabled" : ""}
-                        // profile__button_edit${isValid ? "-disabled" : ""}
+                            className={`profile__button profile__button_edit 
+                            profile__button_edit${!isValid && "-disabled"}
+                            `}
+                            disabled={!isValid && "disabled"}
+
                         >
                             {text}
                         </button>
