@@ -136,7 +136,6 @@ function App() {
       setLoggedIn(true);
     }
     if (loggedIn) {
-      writeSavedMovies();
       mainApi
         .getUserInfo()
         .then(res => {
@@ -152,7 +151,8 @@ function App() {
         .then((res) => {
           setSavedMovies(res);
         })
-        .catch(err => console.log(`Ошибка: ${err.message}`))
+        .catch(err => console.log(`Ошибка: ${err.message}`));
+        writeSavedMovies();
     }
   }, [loggedIn]);
 
