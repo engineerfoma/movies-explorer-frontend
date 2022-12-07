@@ -13,7 +13,7 @@ import Profile from '../Profile/Profile'
 import Footer from '../Footer/Footer'
 import NotFound from '../NotFoundPage/NotFoundPage'
 import useWindowSize from '../../utils/useWindowSize'
-import mainApi from '../../utils/MainApi'
+import MainApi from '../../utils/MainApi'
 import * as Auth from '../../utils/Auth'
 
 function App() {
@@ -29,10 +29,9 @@ function App() {
   const [stateMessage, setStateMessage] = useState(false);
 
   const handleSaveMovie = (movie) => {
-    return mainApi
+    return MainApi
       .addSavedMovie(movie)
       .then((res) => {
-        writeSavedMovies();
         setSavedMovies([...savedMovies, res])
       })
       .catch((err) => console.log(`Ошибка: ${err.message}`))
@@ -44,7 +43,7 @@ function App() {
 
   const handleRemoveMovie = (movieId) => {
     const id = getMovieIdOnSavedMovies(movieId, savedMovies);
-    return mainApi
+    return MainApi
       .removeSavedMovie(id)
       .then(() => {
         const moviesList = savedMovies.filter(m => m._id !== id);
@@ -54,7 +53,7 @@ function App() {
   }
 
   const handleRemoveSaveMovie = (movieId) => {
-    return mainApi
+    return MainApi
       .removeSavedMovie(movieId)
       .then(() => {
         const moviesList = savedMovies.filter(m => m._id !== movieId);
@@ -63,48 +62,46 @@ function App() {
       .catch((err) => console.log(`Ошибка: ${err.message}`))
   }
 
-  function writeSavedMovies() {
-    mainApi
-      .getSavedMovies()
-      .then((res) => {
-        setSavedMovies(res.filter(m => m.owner === currentUser?._id))
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
-
   const onLogin = (data) => {
     return Auth
       .authorize(data)
       .then(() => {
         setLoggedIn(true);
+        localStorage.setItem('login', true);
         history.push('/movies');
-        localStorage.setItem('loggedIn', true);
       })
-      .catch((err) => console.log(`Ошибка: ${err.message}`))
+      .catch((err) => {
+        localStorage.setItem('login', false);
+        console.log(`Ошибка: ${err.message}`)
+      })
   }
 
   const onRegister = (data) => {
-    Auth
-    .register(data)
-    .then(() => {
-      onLogin(data);
-    })
-    .catch(err => {
-      if (err === "Такой email уже существует") {
-        console.log(`Ошибка: ${err.message}`)
-      }
-      console.log(`Ошибка: ${err.message}`)
-    })
+    return Auth
+      .register(data)
+      .then(() => {
+        onLogin(data);
+        setLoggedIn(true);
+        localStorage.setItem('login', true);
+        history.push('/movies');
+      })
+      .catch(err => {
+        if (err === "Такой email уже существует") {
+          console.log(`Ошибка: ${err.message}`)
+        }
+        console.log(`Ошибка: ${err.message}`);
+        localStorage.setItem('login', false);
+      })
   }
 
   const onLogout = () => {
     return Auth
       .signOut()
       .then(() => {
+        localStorage.setItem('login', false);
         setLoggedIn(false);
-        history.push("/signin");
+        localStorage.clear();
+        history.push("/");
       })
       .catch(err => console.log(`Ошибка: ${err.message}`));
   }
@@ -112,7 +109,7 @@ function App() {
   const updateUserData = (userData) => {
     setLoading(true);
     setStateMessage(true);
-    Promise.all([mainApi.setUserInfo(userData), mainApi.getUserInfo()])
+    Promise.all([MainApi.setUserInfo(userData), MainApi.getUserInfo()])
       .then(([data, res]) => {
         setCurrentUser(data);
         setCurrentUser(res);
@@ -128,31 +125,35 @@ function App() {
   };
 
   useEffect(() => {
+    if (localStorage.getItem('login', true)) {
+      setLoggedIn(true);
+    }
+    MainApi
+    .getUserInfo()
+    .then((res) => {
+      setCurrentUser(res);
+    })
+    .catch(err => console.log(`Ошибка: ${err.message}`));
     setStateMessage(true);
   }, [])
 
   useEffect(() => {
-    if (localStorage.getItem('loggedIn', true)) {
-      setLoggedIn(true);
-    }
+    
     if (loggedIn) {
-      mainApi
+      MainApi
         .getUserInfo()
         .then(res => {
-          setLoggedIn(true);
           setCurrentUser(res);
         })
         .catch(err => {
-          setLoggedIn(false);
           localStorage.clear();
         });
-      mainApi
+      MainApi
         .getSavedMovies()
         .then((res) => {
           setSavedMovies(res);
         })
         .catch(err => console.log(`Ошибка: ${err.message}`));
-        writeSavedMovies();
     }
   }, [loggedIn]);
 
@@ -212,7 +213,6 @@ function App() {
               :
               <Login
                 onLogin={onLogin}
-                errorMessage={errorMessage}
               />
             }
           </Route>

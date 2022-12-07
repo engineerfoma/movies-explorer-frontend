@@ -4,7 +4,7 @@ class Api {
     constructor(url) {
         this._url = url;
         this._headers = {
-            'Content-Type': 'application/json'
+            'Content-Type': "application/json",
         }
     }
 

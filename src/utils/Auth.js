@@ -6,7 +6,7 @@ const checkResponse = (response) =>
     : Promise.reject(new Error(`Ошибка ${response.status}: ${response.statusText}`));
 
 const headers = {
-  'Content-type': "application/json",
+  'Content-Type': "application/json",
 };
 
 export const register = ({ name, email, password }) => {

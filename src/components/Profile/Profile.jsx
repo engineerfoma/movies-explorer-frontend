@@ -29,6 +29,11 @@ function Profile({ onUpdateUserData, onLogout, loading, stateMessage }) {
         onUpdateUserData(values);
     }
 
+    const handleLogout = (e) => {
+        e.preventDefault();
+        onLogout();
+    }
+
     return (
         <main className="profile">
             <div className="profile__container">
@@ -81,11 +86,10 @@ function Profile({ onUpdateUserData, onLogout, loading, stateMessage }) {
                             profile__button_edit${!isValid && "-disabled"}
                             `}
                             disabled={!isValid && "disabled"}
-
                         >
                             {text}
                         </button>
-                        <button className="profile__button profile__button_logout" onClick={onLogout}>Выйти из аккаунта</button>
+                        <button className="profile__button profile__button_logout" onClick={handleLogout}>Выйти из аккаунта</button>
                     </div>
                 </form>
             </div>
