@@ -1,6 +1,7 @@
 @import '../vars';
 
 .search {
+
     padding: 60px 0 70px;
     margin: 0 70px 10px;
     border-bottom: 1px solid $border_portfolio;
@@ -16,10 +17,25 @@
     }
 
     &__form {
+        position: relative;
         width: 100%;
         margin-bottom: 41px;
         display: grid;
         grid-template-columns: 95fr 5fr;
+
+        &_error {
+            @include flex(row, center, center);
+            @include font(400, 12px, 1.21);
+            position: absolute;
+            bottom: -20px;
+            left: 25px;
+            margin: 0 auto;
+            color: $red;
+
+            @media screen and (max-width: $breakpoint800) {
+                font-size: 11px;
+            }
+        }
     }
 
     &__input-movie {

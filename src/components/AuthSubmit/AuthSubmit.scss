@@ -1,7 +1,7 @@
 @import '../vars';
 
 .form__submit {
-    @include flex(column, end, center);
+    @include flex(column, flex-end, center);
     width: 100%;
 
     &_login {
@@ -39,6 +39,14 @@
         &:hover {
             cursor: pointer;
             opacity: .8;
+        }
+
+        &-disabled {
+            opacity: .8;
+            &:hover {
+                cursor: default;
+                opacity: .8;
+            }
         }
     }
 

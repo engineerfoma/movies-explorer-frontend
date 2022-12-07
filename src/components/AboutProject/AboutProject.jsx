@@ -1,4 +1,4 @@
-import "./AboutProject.scss";
+import "./AboutProject.scss"
 
 function AboutProject({ aboutRef }) {
 

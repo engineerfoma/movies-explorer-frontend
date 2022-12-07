@@ -1,9 +1,9 @@
-import './MoreMovies.scss';
+import './MoreMovies.scss'
 
-function Movies() {
+function Movies({ handleClick }) {
     return (
         <article className="more">
-            <button className='more__button'>Ещё</button>
+            <button className="more__button" onClick={handleClick}>Ещё</button>
         </article>
     )
 }

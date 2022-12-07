@@ -23,6 +23,10 @@
             right: 0;
             transition: .5s ease;
 
+            @media screen and (max-width: $breakpoint580) {
+                padding: 144px 10px 46px;
+            }
+
             @media screen and (max-width: $breakpoint550) {
                 width: 100%;
             }

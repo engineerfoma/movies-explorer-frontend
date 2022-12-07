@@ -1,6 +1,5 @@
-import './Navigation.scss';
-import { NavLink } from 'react-router-dom';
-import NavTab from '../NavTab/NavTab';
+import './Navigation.scss'
+import NavTab from '../NavTab/NavTab'
 
 function Navigation() {
 

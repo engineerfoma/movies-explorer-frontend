@@ -1,5 +1,5 @@
-import './HeaderAuth.scss';
-import { Link } from 'react-router-dom';
+import './HeaderAuth.scss'
+import { Link } from 'react-router-dom'
 
 function HeaderAuth({ title, logo }) {
     return (

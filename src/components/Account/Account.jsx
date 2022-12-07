@@ -1,6 +1,6 @@
-import { NavLink } from 'react-router-dom';
-import './Account.scss';
-import Profile from '../../images/profile.svg';
+import { NavLink } from 'react-router-dom'
+import './Account.scss'
+import Profile from '../../images/profile.svg'
 
 function Account({ burger, state }) {
 

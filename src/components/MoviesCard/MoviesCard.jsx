@@ -1,26 +1,55 @@
-import './MoviesCard.scss';
-// import { useState } from 'react';
+import './MoviesCard.scss'
+import { useHistory } from 'react-router-dom';
+import { MOVIES_URL } from "../../utils/constants"
 
-function MoviesCard({ remove, movie }) {
+function MoviesCard(props) {
 
-    // const [activeButton, setActiveButton] = useState(false);
+    const history = useHistory();
+    const isLiked = props.savedMovies.find(m => m.movieId === props.movie.id) || "";
 
-    // function toggleButton() {
-    //     setActiveButton(!activeButton);
-    // }
+    const handlerToggleSave = () => {
+        if (isLiked) {
+            props.handleRemoveMovie(props.movie.id);
+
+        } else {
+            props.handleSaveMovie(props.movie);
+        }
+    };
+
+    const handleDeleteClick = () => {
+        props.handleRemoveMovie(props.movie._id);
+    };
+
+    const getTimeFromMins = (duration) => {
+        let hours = Math.trunc(duration / 60);
+        let minutes = duration % 60;
+        return `${hours} ч ${minutes} мин`;
+    };
+    const duration = getTimeFromMins(props.movie.duration);
+
 
     return (
         <li className="list-element">
-            <div className="list-element__container">
-                <h3 className="list-element__title">{movie.title}</h3>
-                <span className="list-element__duration">{movie.duration}</span>
-            </div>
-            <img src={movie.poster} alt="фильм" className="list-element__img" />
-            <button type="button" className={`list-element__button_default list-element__button${!remove ? `_save` : `_remove`}`} />
+            <a href={props.movie.trailerLink} rel="noreferrer" className="list-element_link" target="_blank">
+                <div className="list-element__container">
+                    <h3 className="list-element__title">{props.movie.nameRU}</h3>
+                    <span className="list-element__duration">{duration}</span>
+                </div>
+                {history.location.pathname === "/movies" && (
+                    <img src={`${MOVIES_URL}${props.movie.image.url}`} alt="фильм" className="list-element__img" />
+                )}
+                {history.location.pathname === "/saved-movies" && (
+                    <img src={props.movie.image} alt="фильм" className="list-element__img" />
+
+                )}
+            </a>
+            {history.location.pathname === "/movies" && (
+                <button type="button" className={`list-element__button_default ${!isLiked ? "list-element__button_saved" : ""}`} onClick={handlerToggleSave} />
+            )}
+            {history.location.pathname === "/saved-movies" && (
+                <button type="button" className="list-element__button_default list-element__button_remove" onClick={handleDeleteClick} />
+            )}
         </li>
-
-
-
     )
 }
 
