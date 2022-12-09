@@ -1,8 +1,9 @@
 import './Profile.scss'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { CurrentUserContext } from '../../context/CurrentUserContext'
 import useFormWithValidation from '../../utils/validationForm'
 import { completeMessage } from '../../utils/constants'
+import { useEffect } from 'react'
 
 function Profile({ onUpdateUserData, onLogout, loading, stateMessage }) {
     const currentUser = useContext(CurrentUserContext);
@@ -10,13 +11,15 @@ function Profile({ onUpdateUserData, onLogout, loading, stateMessage }) {
         values,
         errors,
         isValid,
+        resetForm,
         handleChange
     } = useFormWithValidation();
-
     const text = (`${loading ?
         'Редактирование...'
         :
         'Редактировать'}`);
+        
+    const validation = !isValid || (values.name === currentUser?.name && values.email === currentUser?.email);
 
     const handlerSubmitForm = (e) => {
         e.preventDefault();
@@ -28,6 +31,13 @@ function Profile({ onUpdateUserData, onLogout, loading, stateMessage }) {
         }
         onUpdateUserData(values);
     }
+
+
+    useEffect(() => {
+        if (currentUser) {
+            resetForm(currentUser);
+        }
+    }, [currentUser, resetForm]);
 
     const handleLogout = (e) => {
         e.preventDefault();
@@ -83,9 +93,9 @@ function Profile({ onUpdateUserData, onLogout, loading, stateMessage }) {
                         <button
                             type="submit"
                             className={`profile__button profile__button_edit 
-                            profile__button_edit${!isValid && "-disabled"}
+                            profile__button_edit${validation && "-disabled"}
                             `}
-                            disabled={!isValid && "disabled"}
+                            disabled={validation && "disabled"}
                         >
                             {text}
                         </button>

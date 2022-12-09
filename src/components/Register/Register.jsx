@@ -9,7 +9,7 @@ function Register({ onRegister }) {
         values,
         errors,
         isValid,
-        resetForm,
+        // resetForm,
         handleChange,
     } = useFormWithValidation();
 
@@ -18,9 +18,9 @@ function Register({ onRegister }) {
         onRegister(values);
     }
 
-    useEffect(() => {
-        resetForm();
-    }, [resetForm])
+    // useEffect(() => {
+    //     resetForm();
+    // }, [resetForm])
 
     return (
         <main className="register">

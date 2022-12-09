@@ -3,6 +3,14 @@ import Movie from '../MoviesCard/MoviesCard'
 import MoreMovies from '../MoreMovies/MoreMovies'
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import {
+    Desktop_Movies,
+    Table_Movies, Phone_Movies,
+    Desktop_width,
+    Table_width,
+    More_films_desc,
+    More_films_tab
+} from '../../utils/constants'
 
 function MoviesCard({
     filteredMovies,
@@ -14,8 +22,8 @@ function MoviesCard({
     const history = useHistory();
     const [displayMovies, setDisplayMovies] = useState(filteredMovies);
     const [numberOfFilms, setNumberOfFilms] = useState({
-        quantityMovies: 12,
-        moreMovies: 3,
+        quantityMovies: Desktop_Movies,
+        moreMovies: More_films_desc,
     });
 
     const handleClick = () => {
@@ -29,20 +37,20 @@ function MoviesCard({
     };
 
     useEffect(() => {
-        if (windowWidth > 1279) {
+        if (windowWidth > Desktop_width) {
             setNumberOfFilms({
-                quantityMovies: 12,
-                moreMovies: 3
+                quantityMovies: Desktop_Movies,
+                moreMovies: More_films_desc
             })
-        } else if ((windowWidth >= 481) && (windowWidth <= 1279)) {
+        } else if ((windowWidth >= Table_width) && (windowWidth <= Desktop_width)) {
             setNumberOfFilms({
-                quantityMovies: 8,
-                moreMovies: 2
+                quantityMovies: Table_Movies,
+                moreMovies: More_films_tab
             })
-        } else if (windowWidth < 481) {
+        } else if (windowWidth < Table_width) {
             setNumberOfFilms({
-                quantityMovies: 5,
-                moreMovies: 2
+                quantityMovies: Phone_Movies,
+                moreMovies: More_films_tab
             })
         }
     }, [windowWidth, setNumberOfFilms.quantityMovies]);

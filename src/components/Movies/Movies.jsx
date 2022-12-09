@@ -3,7 +3,7 @@ import SearchForm from '../SearchForm/SearchForm'
 import Preloader from '../Preloader/Preloader'
 import MoviesCardList from '../MoviesCardList/MoviesCardList'
 import { getMovies } from '../../utils/MoviesApi'
-import { errorMessageFormValidate, errorNotFound, errorNotConnection } from '../../utils/constants'
+import { errorMessageFormValidate, errorNotFound, errorNotConnection, Short_duration } from '../../utils/constants'
 
 import './Movies.scss'
 
@@ -31,7 +31,7 @@ function Movies({
         );
         setFilteredMovies(
             checked ?
-                filterMovies.filter(movie => movie.duration <= 40)
+                filterMovies.filter(movie => movie.duration <= Short_duration)
                 :
                 filterMovies
         );

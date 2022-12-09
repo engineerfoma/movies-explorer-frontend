@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './SavedMovies.scss'
 import SearchForm from '../SearchForm/SearchForm'
 import MoviesCardList from '../MoviesCardList/MoviesCardList'
+import { Short_duration } from '../../utils/constants'
 
 function SavedMovies({
     errorMessage,
@@ -24,10 +25,10 @@ function SavedMovies({
     useEffect(() => {
         setQueryMovies(films);
         if (checkboxValue && !queryActive) {
-            setQueryMovies(films.filter((movie) => movie.duration <= 40))
+            setQueryMovies(films.filter((movie) => movie.duration <= Short_duration))
         }
         if (checkboxValue && queryActive) {
-            setQueryMovies(searchMovies.filter((movie) => movie.duration <= 40))
+            setQueryMovies(searchMovies.filter((movie) => movie.duration <= Short_duration))
         }
         if (!checkboxValue && queryActive) {
             setQueryMovies(searchMovies)
@@ -67,7 +68,7 @@ function SavedMovies({
         })
         setSearchMovies(queryMoviesSearchArray)
         if (checkboxValue) {
-            setCheckboxMovies(queryMoviesSearchArray.filter((movie) => movie.duration <= 40))
+            setCheckboxMovies(queryMoviesSearchArray.filter((movie) => movie.duration <= Short_duration))
         }
         if (queryMoviesSearchArray.length === 0) {
             setSearchError(true)

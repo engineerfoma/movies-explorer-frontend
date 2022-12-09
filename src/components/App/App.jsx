@@ -81,14 +81,22 @@ function App() {
       .register(data)
       .then(() => {
         onLogin(data);
-        setLoggedIn(true);
-        localStorage.setItem('login', true);
-        history.push('/movies');
+        // updateUserData(data);
+        // setLoggedIn(true);
+        // localStorage.setItem('login', true);
+        // history.push('/movies');
       })
       .catch(err => {
         if (err === "Такой email уже существует") {
           console.log(`Ошибка: ${err.message}`)
         }
+        MainApi
+    .getUserInfo()
+    .then((res) => {
+      setCurrentUser(res);
+    })
+    .catch(err => console.log(`Ошибка: ${err.message}`));
+        
         console.log(`Ошибка: ${err.message}`);
         localStorage.setItem('login', false);
       })
@@ -138,7 +146,6 @@ function App() {
   }, [])
 
   useEffect(() => {
-    
     if (loggedIn) {
       MainApi
         .getUserInfo()

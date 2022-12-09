@@ -6,3 +6,15 @@ export const errorNotConnection = 'Во время запроса произош
 export const errorNotFound = 'Ничего не найдено';
 export const repeatMessage = 'Ошибка!';
 export const completeMessage = 'Профиль успешно изменён!';
+export const Short_duration = 40;
+export const Desktop_Movies = 12;
+export const Table_Movies = 8;
+export const Phone_Movies = 5;
+export const Desktop_width = 1279;
+export const Table_width = 481;
+export const More_films_desc = 3;
+export const More_films_tab = 2;
+
+
+
+
