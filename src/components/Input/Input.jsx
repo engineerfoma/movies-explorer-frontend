@@ -1,6 +1,14 @@
-import './Input.scss';
+import './Input.scss'
 
-function Input({ about, placeholder, value, state }) {
+function Input({
+    about,
+    placeholder,
+    state,
+    values,
+    pattern,
+    onChange,
+    minLength,
+    maxLength }) {
 
     return (
         <div className={`container${state ? "__profile" : ""} container__${about}`}>
@@ -9,29 +17,19 @@ function Input({ about, placeholder, value, state }) {
                 className={`label label__${about} ${state ? "label__profile" : ""}`}>
                 {placeholder}
             </label>
-            {state ? (
-                <input
-                    type={about === "name" ? `text` : `${about}`}
-                    id={`input-${about}`}
-                    name={about}
-                    placeholder={placeholder}
-                    className={`input input__profile input__${about}`}
-                    value={value}
-                    required
-                    readOnly
-                />
-            ) : (
-                <input
-                    type={about === "name" ? `text` : `${about}`}
-                    id={`input-${about}`}
-                    name={about}
-                    placeholder={placeholder}
-                    className={`input input__${about}`}
-                    value={value}
-                    required
-                />
-            )
-            }
+            <input
+                type={about === "name" ? "text" : `${about}`}
+                id={`input-${about}`}
+                name={about}
+                onChange={onChange}
+                placeholder={placeholder}
+                className={`input input__${about}`}
+                value={`${values}.${about}` || ""}
+                required
+                pattern={pattern}
+                minLength={minLength}
+                maxLength={maxLength}
+            />
         </div>
     )
 }

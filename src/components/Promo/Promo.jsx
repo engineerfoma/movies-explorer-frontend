@@ -1,5 +1,5 @@
-import Planet from '../../images/landing-logo.png';
-import './Promo.scss';
+import Planet from '../../images/landing-logo.png'
+import './Promo.scss'
 
 function Promo({ scroll }) {
 

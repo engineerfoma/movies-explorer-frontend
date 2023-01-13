@@ -1,9 +1,9 @@
-import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
-import './Burger.scss';
-import BurgerMenu from '../../images/burger.svg';
-import Account from '../Account/Account';
-import Close from '../../images/close.svg';
+import { NavLink } from 'react-router-dom'
+import { useState } from 'react'
+import './Burger.scss'
+import BurgerMenu from '../../images/burger.svg'
+import Account from '../Account/Account'
+import Close from '../../images/close.svg'
 
 function Burger() {
 

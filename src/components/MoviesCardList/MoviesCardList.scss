@@ -14,9 +14,11 @@
     &__list {
         @include flex(row, center, center);
         flex-wrap: wrap;
-        gap: 32px 32px;
+        gap: 32px 30px;
         padding: 0;
-        margin: 0;
+        margin: 0 auto;
+        max-width: 1140px;
+
 
         @media screen and (max-width: $breakpoint900) {
             gap: 35px 24px;

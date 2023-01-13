@@ -9,6 +9,12 @@
             padding: 60px 14px;
         }
 
+        &_avatar {
+            object-fit: cover;
+            width: 270px;
+            height: 330px;
+        }
+
         &_container {
             display: grid;
             grid-template-areas:

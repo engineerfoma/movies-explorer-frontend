@@ -1,7 +1,7 @@
 @import '../vars';
 
 .form {
-    @include flex(column, center, start);
+    @include flex(column, center, flex-start);
     margin: 0 auto;
     box-sizing: border-box;
     width: 31%;

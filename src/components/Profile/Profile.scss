@@ -25,6 +25,15 @@
         }
     }
 
+    &__input {
+        width: 70%;
+        text-align: right;
+        background-color: $bck-color;
+        color: $white-color;
+        border: none;
+        outline: none;
+    }
+
     &__title {
         @include font(500, 24px, 1.21);
         margin: 0 0 123px;
@@ -71,11 +80,44 @@
 
         &_edit {
             color: $white-color;
+
+            &-disabled {
+                color: $font_grey;
+                &:hover {
+                    cursor: default;
+                    opacity: 1;
+                }
+            }
         }
 
         &_logout {
             color: $red;
             font-weight: 500;
         }
+    }
+}
+
+.container {
+    &__email {
+        position: relative;
+    }
+
+    &__profile {
+        position: relative;
+    }
+}
+
+.message {
+    @include flex(row, center, center);
+    padding: 50px 0 0;
+    @include font(400, 16px, 1.2);
+    color: $white-color;
+
+    @media screen and (max-width: $breakpoint900) {
+        @include font(400, 12px, 1.25);
+    }
+
+    &__error {
+        color: $red;
     }
 }
